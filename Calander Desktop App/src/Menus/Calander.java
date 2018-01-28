@@ -15,14 +15,14 @@ import javax.swing.table.DefaultTableModel;
 public class Calander extends JPanel
 {
 	
-	JTable tableCalander;
+	JTable tableCalendar;
 	JScrollPane tableScroll;
 	JButton nextMonthButton,prevMonthButton;
 	
 	public Calander()
 	{
 		
-		tableCalander = new JTable();
+		tableCalendar = new JTable();
 		tableScroll = new JScrollPane();
 		nextMonthButton = new JButton();
 		prevMonthButton = new JButton();
@@ -32,7 +32,7 @@ public class Calander extends JPanel
 	   setLayout(new GridBagLayout());
 	   GridBagConstraints gc = new GridBagConstraints();
 	       
-	   tableCalander.setModel(new DefaultTableModel(
+	   tableCalendar.setModel(new DefaultTableModel(
 			   new Object [][] {
 	                {null, null, null, null},
 	                {null, null, null, null},
@@ -45,7 +45,7 @@ public class Calander extends JPanel
 	            }
 	        ));
 	        
-	   tableScroll.setViewportView(tableCalander);
+	   tableScroll.setViewportView(tableCalendar);
 
 	   gc.gridx = 0;
 	   gc.gridy = 1;
