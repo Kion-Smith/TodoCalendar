@@ -2,16 +2,19 @@ package Main;
 
 import javax.swing.JFrame;
 
+import Menus.CalanderFrame;
+
 public class Launcher extends JFrame
 {
 	public static void main(String[] args)
 	{
-		JFrame frame = new JFrame("Calander");
-		frame.setSize(1280, 768);
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		CalanderFrame cf = new CalanderFrame();
+		cf.setTitle("Calander App");
+		cf.setSize(1280, 768);
+		cf.setVisible(true);
+		cf.setLocationRelativeTo(null);
+		cf.setResizable(false);
+		cf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
 }
