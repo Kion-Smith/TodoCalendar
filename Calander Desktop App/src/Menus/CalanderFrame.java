@@ -2,6 +2,7 @@ package Menus;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,6 +24,9 @@ public class CalanderFrame extends JFrame implements ActionListener
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		
+		gc.ipadx = 100;
+		gc.ipady = 100;
+		gc.insets = new Insets(0,0,0,100);
 		add(c,gc);
 		add(l,gc);
 		

@@ -22,7 +22,7 @@ public class Calander extends JPanel
 	public Calander()
 	{
 		
-		tableCalendar = new JTable();
+		tableCalendar = new JTable(10,5);
 		tableScroll = new JScrollPane();
 		nextMonthButton = new JButton();
 		prevMonthButton = new JButton();
@@ -34,14 +34,15 @@ public class Calander extends JPanel
 	       
 	   tableCalendar.setModel(new DefaultTableModel(
 			   new Object [][] {
-	                {null, null, null, null},
-	                {null, null, null, null},
-	                {null, null, null, null},
-	                {null, null, null, null}
+	                {null, null, null, null,null,null,null},
+	                {null, null, null, null,null,null,null},
+	                {null, null, null, null,null,null,null},
+	                {null, null, null, null,null,null,null},
+	                {null, null, null, null,null,null,null}
 	            },
 			   
 	           new String [] {
-	                "Title 1", "Title 2", "Title 3", "Title 4"
+	                "Sunday", "Monday", "Wednesday", "Thursday","Friday","Saturday"
 	            }
 	        ));
 	        
@@ -53,24 +54,27 @@ public class Calander extends JPanel
 	   gc.fill = GridBagConstraints.BOTH;
 	   gc.ipadx = 203;
 	   gc.ipady = 136;
-	   gc.anchor = GridBagConstraints.NORTHWEST;
+	  // gc.anchor = GridBagConstraints.NORTHWEST;
 	   gc.weightx = 1.0;
 	   gc.weighty = 1.0;
 	   gc.insets = new Insets(6, 11, 12, 0);
 	   add(tableScroll, gc);
 
+	   gc.fill = 0;
 	   nextMonthButton.setText("->");
+	   gc.ipadx = 0;
+	   gc.ipady =0;
 	   gc.gridx = 1;
 	   gc.gridy = 0;
 	   gc.gridwidth = 3;
-	   gc.anchor = GridBagConstraints.NORTHWEST;
+	 //  gc.anchor = GridBagConstraints.NORTHWEST;
 	   gc.insets = new Insets(1, 100, 0, 1);
 	   add(nextMonthButton, gc);
 
 	   prevMonthButton.setText("<-");
 	   gc.gridx = 0;
 	   gc.gridy = 0;
-	   gc.anchor = GridBagConstraints.NORTHWEST;
+	 //  gc.anchor = GridBagConstraints.NORTHWEST;
 	   gc.insets = new Insets(1, 1, 0, 0);
 	   add(prevMonthButton, gc);
 
