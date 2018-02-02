@@ -45,7 +45,8 @@ public class Calander extends JPanel
 	                "Sunday", "Monday", "Wednesday", "Thursday","Friday","Saturday"
 	            }
 	        ));
-	        
+	        tableCalendar.getTableHeader().setReorderingAllowed(false);
+	        tableCalendar.setRowSelectionAllowed(false);
 	   tableScroll.setViewportView(tableCalendar);
 
 	   gc.gridx = 0;
