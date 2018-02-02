@@ -24,8 +24,8 @@ public class CalanderFrame extends JFrame implements ActionListener
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		
-		gc.ipadx = 100;
-		gc.ipady = 100;
+		gc.ipadx = 200;
+		gc.ipady = 200;
 		gc.insets = new Insets(0,0,0,100);
 		add(c,gc);
 		add(l,gc);

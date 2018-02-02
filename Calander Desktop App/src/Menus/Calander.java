@@ -47,7 +47,11 @@ public class Calander extends JPanel
 	        ));
 	        tableCalendar.getTableHeader().setReorderingAllowed(false);
 	        tableCalendar.setRowSelectionAllowed(false);
+	        
+	        tableCalendar.setRowHeight(100);
+	        tableCalendar.setRowHeight(100);
 	   tableScroll.setViewportView(tableCalendar);
+	   
 
 	   gc.gridx = 0;
 	   gc.gridy = 1;
