@@ -31,14 +31,15 @@ public class Calander extends JPanel
 	   setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 	   setLayout(new GridBagLayout());
 	   GridBagConstraints gc = new GridBagConstraints();
-	       
+	   //maybe have a counter for this
+	    int count =1;
 	   tableCalendar.setModel(new DefaultTableModel(
 			   new Object [][] {
-	                {null, null, null, null,null,null,null},
-	                {null, null, null, null,null,null,null},
-	                {null, null, null, null,null,null,null},
-	                {null, null, null, null,null,null,null},
-	                {null, null, null, null,null,null,null}
+	                {count++, count++, count++, count++,count++,count++,count++},
+	                {count++, count++, count++, count++,count++,count++,count++},
+	                {count++, count++, count++, count++,count++,count++,count++},
+	                {count++, count++, count++, count++,count++,count++,count++},
+	                {count++, count++, count++}
 	            },
 			   
 	           new String [] {
@@ -52,17 +53,17 @@ public class Calander extends JPanel
 	        tableCalendar.setRowHeight(100);
 	   tableScroll.setViewportView(tableCalendar);
 	   
-
+	   
 	   gc.gridx = 0;
 	   gc.gridy = 1;
 	   gc.gridwidth = 2;
 	   gc.fill = GridBagConstraints.BOTH;
-	   gc.ipadx = 203;
-	   gc.ipady = 136;
+	   gc.ipadx = 400;
+	   gc.ipady = 430;
 	  // gc.anchor = GridBagConstraints.NORTHWEST;
 	   gc.weightx = 1.0;
 	   gc.weighty = 1.0;
-	   gc.insets = new Insets(6, 11, 12, 0);
+	  
 	   add(tableScroll, gc);
 
 	   gc.fill = 0;
@@ -87,7 +88,7 @@ public class Calander extends JPanel
 	   gc.gridx = 0;
 	   gc.gridy = 1;
 	   gc.anchor = GridBagConstraints.NORTHWEST;
-	   gc.insets = new Insets(18, 10, 0, 0);
+	  
 	   
 	   
 	}

@@ -8,6 +8,7 @@ public class Launcher extends JFrame
 {
 	public static void main(String[] args)
 	{
+		//maybe redo this in javafx
 		CalanderFrame cf = new CalanderFrame();
 		cf.setTitle("Calander App");
 		cf.setSize(1280, 768);
