@@ -26,8 +26,11 @@ public class CalanderFrame extends JFrame implements ActionListener
 		
 		gc.ipadx = 200;
 		gc.ipady = 200;
-		gc.insets = new Insets(0,0,0,100);
 		add(c,gc);
+		
+		gc.ipadx = 200;
+		gc.ipady = 200;
+		gc.insets = new Insets(30, 50, 0, 30);
 		add(l,gc);
 		
 	}

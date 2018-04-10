@@ -24,8 +24,8 @@ public class Calander extends JPanel
 		
 		tableCalendar = new JTable(10,5);
 		tableScroll = new JScrollPane();
-		nextMonthButton = new JButton();
-		prevMonthButton = new JButton();
+		nextMonthButton = new JButton("->");
+		prevMonthButton = new JButton("<-");
 		
 		
 	   setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
@@ -67,7 +67,6 @@ public class Calander extends JPanel
 	   add(tableScroll, gc);
 
 	   gc.fill = 0;
-	   nextMonthButton.setText("->");
 	   gc.ipadx = 0;
 	   gc.ipady =0;
 	   gc.gridx = 1;
@@ -77,7 +76,6 @@ public class Calander extends JPanel
 	   gc.insets = new Insets(1, 100, 0, 1);
 	   add(nextMonthButton, gc);
 
-	   prevMonthButton.setText("<-");
 	   gc.gridx = 0;
 	   gc.gridy = 0;
 	 //  gc.anchor = GridBagConstraints.NORTHWEST;
