@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="calanderVBox" prefHeight="768.0" prefWidth="1280.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.Controller">
+  <AnchorPane prefHeight="323.0" prefWidth="688.0">
+    <children>
+      <MenuBar layoutX="0.0" layoutY="0.0" prefWidth="1280.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TextField layoutX="833.0" layoutY="665.0" prefHeight="89.0" prefWidth="308.0" />
+      <Button fx:id="addBtn" layoutX="1150.0" layoutY="665.0" mnemonicParsing="false" onAction="#assignNote" prefHeight="40.0" prefWidth="117.0" text="Add" />
+      <Button fx:id="rightArrowBtn" layoutX="683.0" layoutY="39.0" mnemonicParsing="false" onAction="#nextMonth" prefHeight="40.0" prefWidth="140.0" text="→" textAlignment="RIGHT">
+        <font>
+          <Font size="24.0" fx:id="x1" />
+        </font>
+      </Button>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="47.0" prefHeight="32.0" prefWidth="508.0" text="Month/  Year" textAlignment="CENTER">
+        <font>
+          <Font name="System Bold" size="24.0" fx:id="x2" />
+        </font>
+      </Label>
+      <Button fx:id="leftArrowBtn" alignment="TOP_CENTER" contentDisplay="BOTTOM" font="$x1" layoutX="16.0" layoutY="39.0" mnemonicParsing="false" onAction="#lastMonth" prefHeight="40.0" prefWidth="140.0" text="←" textAlignment="RIGHT" />
+      <Label alignment="CENTER" font="$x2" layoutX="967.0" layoutY="47.0" prefWidth="167.0" text="Notes" textAlignment="RIGHT" />
+      <ListView layoutX="833.0" layoutY="100.0" prefHeight="556.0" prefWidth="434.0" />
+      <Button fx:id="RemoveBtn" layoutX="1151.0" layoutY="711.0" mnemonicParsing="false" onAction="#deleteNote" prefHeight="39.0" prefWidth="116.0" text="Remove" />
+      <GridPane gridLinesVisible="true" layoutX="15.0" layoutY="129.0" prefHeight="556.0" prefWidth="807.0" visible="true">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <GridPane layoutX="15.0" layoutY="105.0" prefHeight="20.0" prefWidth="807.0">
+        <children>
+          <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="116.0" text="Sunday" textAlignment="LEFT" textOverrun="CLIP" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <font>
+              <Font name="System Bold" size="12.0" fx:id="x3" />
+            </font>
+          </Label>
+          <Label alignment="CENTER" contentDisplay="CENTER" font="$x3" prefWidth="116.0" text="Monday" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+          <Label alignment="CENTER" contentDisplay="CENTER" font="$x3" prefWidth="116.0" text="Tuesday" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+          <Label alignment="CENTER" contentDisplay="CENTER" font="$x3" prefWidth="115.0" text="Wednesday" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+          <Label alignment="CENTER" contentDisplay="CENTER" font="$x3" prefWidth="115.0" text="Thursday" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+          <Label alignment="CENTER" contentDisplay="CENTER" font="$x3" prefWidth="115.0" text="Friday" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+          <Label alignment="CENTER" contentDisplay="CENTER" font="$x3" prefWidth="117.0" text="Saturday" GridPane.columnIndex="6" GridPane.rowIndex="0" />
+        </children>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+    </children>
+  </AnchorPane>
+</VBox>
