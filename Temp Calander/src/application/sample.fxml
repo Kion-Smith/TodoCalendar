@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -27,23 +28,305 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TextField layoutX="833.0" layoutY="665.0" prefHeight="89.0" prefWidth="308.0" />
+      <TextField layoutX="833.0" layoutY="665.0" prefHeight="89.0" prefWidth="301.0" />
       <Button fx:id="addBtn" layoutX="1150.0" layoutY="665.0" mnemonicParsing="false" onAction="#assignNote" prefHeight="40.0" prefWidth="117.0" text="Add" />
       <Button fx:id="rightArrowBtn" layoutX="683.0" layoutY="39.0" mnemonicParsing="false" onAction="#nextMonth" prefHeight="40.0" prefWidth="140.0" text="→" textAlignment="RIGHT">
         <font>
           <Font size="24.0" fx:id="x1" />
         </font>
       </Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="47.0" prefHeight="32.0" prefWidth="508.0" text="Month/  Year" textAlignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="166.0" layoutY="44.0" prefHeight="32.0" prefWidth="508.0" text="Month/  Year" textAlignment="CENTER">
         <font>
           <Font name="System Bold" size="24.0" fx:id="x2" />
         </font>
       </Label>
       <Button fx:id="leftArrowBtn" alignment="TOP_CENTER" contentDisplay="BOTTOM" font="$x1" layoutX="16.0" layoutY="39.0" mnemonicParsing="false" onAction="#lastMonth" prefHeight="40.0" prefWidth="140.0" text="←" textAlignment="RIGHT" />
-      <Label alignment="CENTER" font="$x2" layoutX="967.0" layoutY="47.0" prefWidth="167.0" text="Notes" textAlignment="RIGHT" />
-      <ListView layoutX="833.0" layoutY="100.0" prefHeight="556.0" prefWidth="434.0" />
+      <Label alignment="CENTER" font="$x2" layoutX="966.0" layoutY="49.0" prefWidth="167.0" text="Notes" textAlignment="RIGHT" />
+      <ListView layoutX="832.0" layoutY="128.0" prefHeight="527.0" prefWidth="434.0" />
       <Button fx:id="RemoveBtn" layoutX="1151.0" layoutY="711.0" mnemonicParsing="false" onAction="#deleteNote" prefHeight="39.0" prefWidth="116.0" text="Remove" />
-      <GridPane gridLinesVisible="true" layoutX="15.0" layoutY="129.0" prefHeight="556.0" prefWidth="807.0" visible="true">
+      <GridPane gridLinesVisible="true" layoutX="15.0" layoutY="128.0" prefHeight="556.0" prefWidth="807.0" visible="true">
+        <children>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="0">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="0">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="2">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="3">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="4">
+            <center>
+              <TextArea editable="false" prefWidth="200.0" promptText="Info" wrapText="true" />
+            </center>
+            <top>
+              <Label text="Label" />
+            </top>
+          </BorderPane>
+        </children>
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -90,4 +373,7 @@
       </GridPane>
     </children>
   </AnchorPane>
+  <stylesheets>
+    <URL value="@style.css" />
+  </stylesheets>
 </VBox>
