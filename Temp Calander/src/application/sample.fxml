@@ -45,7 +45,7 @@
       <Label alignment="CENTER" font="$x2" layoutX="966.0" layoutY="49.0" prefWidth="167.0" text="Notes" textAlignment="RIGHT" />
       <ListView layoutX="832.0" layoutY="128.0" prefHeight="527.0" prefWidth="434.0" />
       <Button fx:id="RemoveBtn" layoutX="1151.0" layoutY="711.0" mnemonicParsing="false" onAction="#deleteNote" prefHeight="39.0" prefWidth="116.0" text="Remove" />
-      <GridPane fx:id="calanderPane" gridLinesVisible="true" layoutX="15.0" layoutY="128.0" prefHeight="556.0" prefWidth="807.0" visible="true">
+      <GridPane fx:id="calanderPane" gridLinesVisible="true" layoutX="15.0" layoutY="128.0" prefHeight="624.0" prefWidth="807.0" visible="true">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -56,6 +56,7 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
+          <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />

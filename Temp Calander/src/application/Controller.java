@@ -33,10 +33,10 @@ public class Controller
 	@FXML private Label curMonth;
 	
 	
-	private BorderPane borderPaneList[] = new BorderPane[35];
-	private Label dateLabelsList[] = new Label[35];
+	private BorderPane borderPaneList[] = new BorderPane[42];
+	private Label dateLabelsList[] = new Label[42];
 	//Text Area
-	private TextArea InfoTextAreaList[] = new TextArea[35];
+	private TextArea InfoTextAreaList[] = new TextArea[42];
 	
 	
 	@FXML private void initialize()
@@ -46,17 +46,15 @@ public class Controller
 		curMonth.setText(curYearMonth.getMonth().toString()+" "+curYearMonth.getYear());
 		
 		//Adding labels and Text area to the boxes using borderPane
-		//this is temporary 
-		int count =1;
-	
-		
-		for(int r=0;r<5;r++)
+		for(int r=0;r<6;r++)
 		{
 			for(int c = 0;c<7;c++)
 			{
 				int curLoc = r*7+c;
+				
+				
 				borderPaneList[curLoc] = new BorderPane();
-				dateLabelsList[curLoc] = new Label(" L "+ count );
+				dateLabelsList[curLoc] = new Label("");
 				InfoTextAreaList[curLoc] = new TextArea();
 				
 				//Unsure about this ->  //InfoTextAreaList[r+c].setEditable(false);
@@ -65,8 +63,7 @@ public class Controller
 				borderPaneList[r*7+c].setTop(dateLabelsList[curLoc]);
 				borderPaneList[r*7+c].setCenter(InfoTextAreaList[curLoc]);
 				calanderPane.add(borderPaneList[curLoc],c,r);
-
-				count++;
+				
 			}
 		}
 		
@@ -76,30 +73,35 @@ public class Controller
 	
 	//test button methods
 	
-	@FXML private void setCalanderDates()
+	private void setCalanderDates()
 	{
 		LocalDate startDate = LocalDate.of(curYearMonth.getYear(),curYearMonth.getMonth(),1);
-		LocalDate endDate = LocalDate.of(curYearMonth.getYear(),curYearMonth.getMonth(), startDate.withDayOfMonth(startDate.lengthOfMonth()).getDayOfMonth() );
-		/*
-	     while (!curDay.getDayOfWeek().toString().equals("SUNDAY") ) {
-	    	 curDay = curDay.minusDays(1);
-	        }
-		*/
-		System.out.println("START :"+startDate+" AKA: "+startDate.getDayOfWeek().toString());
-		System.out.println("END :"+endDate+" AKA: "+endDate.getDayOfWeek().toString());
 		
+		int start = DayStringToNums(startDate.getDayOfWeek().toString());
+		int end=startDate.withDayOfMonth(startDate.lengthOfMonth()).getDayOfMonth();
 		
-		for(int r=0;r<5;r++)
+		int count = 1;
+		for(int r=0;r<6;r++)
 		{
 			for(int c = 0;c<7;c++)
 			{	
 				int curLoc = r*7+c;
-				//dateLabelsList[curLoc].setText("MEME");
-
+				
+				if(curLoc >= start && count <= end)
+				{
+					dateLabelsList[curLoc].setText(" "+ (count) );
+					InfoTextAreaList[curLoc].setText("");
+					count++;
+				}
+				else
+				{
+					dateLabelsList[curLoc].setText("");
+					InfoTextAreaList[curLoc].setText("");
+				}
+				
 				
 			}
 		}
-
 	}
 	
 	private int DayStringToNums(String day)
