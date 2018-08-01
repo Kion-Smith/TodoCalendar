@@ -6,12 +6,19 @@ import java.time.YearMonth;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 
 public class Controller 
@@ -29,15 +36,20 @@ public class Controller
 	@FXML private Button addBtn;
 	@FXML private Button RemoveBtn;
 	
+	private BorderPane borderPaneList[] = new BorderPane[42];
+	
 	//Labels
 	@FXML private Label curMonth;
-	
-	
-	private BorderPane borderPaneList[] = new BorderPane[42];
 	private Label dateLabelsList[] = new Label[42];
+	
 	//Text Area
 	private TextArea InfoTextAreaList[] = new TextArea[42];
 	
+	@FXML private ListView notesList;
+	
+	@FXML private TextArea sendInfoTextArea;
+	
+	private Group calanderTextAreas = new Group();
 	
 	@FXML private void initialize()
 	{
@@ -57,16 +69,19 @@ public class Controller
 				dateLabelsList[curLoc] = new Label("");
 				InfoTextAreaList[curLoc] = new TextArea();
 				
-				//Unsure about this ->  //InfoTextAreaList[r+c].setEditable(false);
+				InfoTextAreaList[curLoc].setEditable(false);
 				
-				InfoTextAreaList[r*7+c].setMaxSize(110, 83);			
-				borderPaneList[r*7+c].setTop(dateLabelsList[curLoc]);
-				borderPaneList[r*7+c].setCenter(InfoTextAreaList[curLoc]);
+				InfoTextAreaList[curLoc].setMaxSize(110, 83);			
+				borderPaneList[curLoc].setTop(dateLabelsList[curLoc]);
+				borderPaneList[curLoc].setCenter(InfoTextAreaList[curLoc]);
+				
+				calanderTextAreas.getChildren().add(InfoTextAreaList[curLoc]);
+				
 				calanderPane.add(borderPaneList[curLoc],c,r);
 				
 			}
 		}
-		
+		//sendInfoTextArea.setStyle("-fx-background-color:BLUE");
 		
 		setCalanderDates();
 	}
@@ -89,14 +104,19 @@ public class Controller
 				
 				if(curLoc >= start && count <= end)
 				{
+					borderPaneList[curLoc].setStyle("-fx-background-color: none");
 					dateLabelsList[curLoc].setText(" "+ (count) );
 					InfoTextAreaList[curLoc].setText("");
+					
 					count++;
 				}
 				else
 				{
 					dateLabelsList[curLoc].setText("");
 					InfoTextAreaList[curLoc].setText("");
+					borderPaneList[curLoc].setStyle("-fx-background-color: #F3F3F3");
+					
+					
 				}
 				
 				
