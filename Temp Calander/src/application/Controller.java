@@ -45,7 +45,7 @@ public class Controller
 	//Text Area
 	private TextArea InfoTextAreaList[] = new TextArea[42];
 	
-	@FXML private ListView notesList;
+	@FXML private ListView<String> notesList;
 	
 	@FXML private TextArea sendInfoTextArea;
 	
@@ -81,7 +81,7 @@ public class Controller
 				
 			}
 		}
-		//sendInfoTextArea.setStyle("-fx-background-color:BLUE");
+		
 		
 		setCalanderDates();
 	}
@@ -157,8 +157,6 @@ public class Controller
 	
 	@FXML private void nextMonth(ActionEvent e)
 	{
-		
-		System.out.println("Next month pressed");
 		curYearMonth = curYearMonth.plusMonths(1);
 		curMonth.setText(curYearMonth.getMonth().toString()+" "+curYearMonth.getYear());
 		
@@ -167,8 +165,6 @@ public class Controller
 	
 	@FXML private void lastMonth(ActionEvent e)
 	{
-		
-		System.out.println("Last month pressed");
 		curYearMonth = curYearMonth.minusMonths(1);
 		curMonth.setText(curYearMonth.getMonth().toString()+" "+curYearMonth.getYear());
 		
@@ -177,12 +173,12 @@ public class Controller
 	
 	@FXML private void assignNote(ActionEvent e)
 	{
-		System.out.println("Sent note");
+		notesList.getItems().add(sendInfoTextArea.getText() );
 	}
 	
 	@FXML private void deleteNote(ActionEvent e)
 	{
-		System.out.println("Clear Note");
+		notesList.getItems().remove(notesList.getSelectionModel().getSelectedItem());
 	}
 	    
  
