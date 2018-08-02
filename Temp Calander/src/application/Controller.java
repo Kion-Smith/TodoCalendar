@@ -4,21 +4,20 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 
 import javafx.event.ActionEvent;
-
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+
 
 
 public class Controller 
@@ -51,6 +50,9 @@ public class Controller
 	
 	private Group calanderTextAreas = new Group();
 	
+	private int selectedDate = -1;
+	
+	
 	@FXML private void initialize()
 	{
 		
@@ -67,17 +69,21 @@ public class Controller
 				
 				borderPaneList[curLoc] = new BorderPane();
 				dateLabelsList[curLoc] = new Label("");
-				InfoTextAreaList[curLoc] = new TextArea();
+				InfoTextAreaList[curLoc] = new TextArea("");
 				
-				InfoTextAreaList[curLoc].setEditable(false);
+				//InfoTextAreaList[curLoc].setEditable(false);
 				
-				InfoTextAreaList[curLoc].setMaxSize(110, 83);			
+				InfoTextAreaList[curLoc].setMaxSize(110, 83);	
+				
+				InfoTextAreaList[curLoc].setText("a");
 				borderPaneList[curLoc].setTop(dateLabelsList[curLoc]);
 				borderPaneList[curLoc].setCenter(InfoTextAreaList[curLoc]);
 				
-				calanderTextAreas.getChildren().add(InfoTextAreaList[curLoc]);
+			//causes program to not work idk why	//calanderTextAreas.getChildren().add(InfoTextAreaList[curLoc]);
 				
 				calanderPane.add(borderPaneList[curLoc],c,r);
+				
+				curCell(c,r);
 				
 			}
 		}
@@ -86,7 +92,21 @@ public class Controller
 		setCalanderDates();
 	}
 	
-	//test button methods
+	//Still unsure about this method
+	private void curCell(int col, int row)
+	{
+        Pane pane = new Pane();
+        pane.setOnMouseClicked(e -> { setSelectedDate(col,row);
+            
+        });
+       calanderPane.add(pane, col, row);
+    }
+	
+	private void setSelectedDate(int col, int row)
+	{
+		selectedDate = row*7+col;
+		System.out.println(selectedDate);
+	}
 	
 	private void setCalanderDates()
 	{
@@ -122,6 +142,7 @@ public class Controller
 				
 			}
 		}
+		
 	}
 	
 	private int DayStringToNums(String day)
@@ -154,7 +175,7 @@ public class Controller
 		}
 		return numvalue;
 	}
-	
+
 	@FXML private void nextMonth(ActionEvent e)
 	{
 		curYearMonth = curYearMonth.plusMonths(1);
@@ -174,12 +195,20 @@ public class Controller
 	@FXML private void assignNote(ActionEvent e)
 	{
 		notesList.getItems().add(sendInfoTextArea.getText() );
+		
+		System.out.println(selectedDate);
+		if(selectedDate != -1)
+		{
+			System.out.println(InfoTextAreaList[selectedDate].getText()+"ran");
+			InfoTextAreaList[selectedDate].setText(sendInfoTextArea.getText());
+		}
+		
+		sendInfoTextArea.setText("");
 	}
 	
 	@FXML private void deleteNote(ActionEvent e)
 	{
 		notesList.getItems().remove(notesList.getSelectionModel().getSelectedItem());
 	}
-	    
  
 }
