@@ -1,5 +1,11 @@
-#calanderTextAreas, #calanderTextAreas .viewport, .text-area .content 
+
+#cal, #cal .content 
 {
-    -fx-background-color: transparent ;
+    -fx-background-color: transparent;
 }
 
+
+#sel, #sel .content 
+{
+    -fx-background-color: #898989;
+}

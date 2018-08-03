@@ -47,10 +47,9 @@ public class Controller
 	@FXML private ListView<String> notesList;
 	
 	@FXML private TextArea sendInfoTextArea;
+
 	
-	private Group calanderTextAreas = new Group();
-	
-	private int selectedDate = -1;
+	private int selectedDateIndex = -1;
 	
 	
 	@FXML private void initialize()
@@ -58,6 +57,8 @@ public class Controller
 		
 		//Set Month to the current month
 		curMonth.setText(curYearMonth.getMonth().toString()+" "+curYearMonth.getYear());
+		
+		
 		
 		//Adding labels and Text area to the boxes using borderPane
 		for(int r=0;r<6;r++)
@@ -74,12 +75,10 @@ public class Controller
 				//InfoTextAreaList[curLoc].setEditable(false);
 				
 				InfoTextAreaList[curLoc].setMaxSize(110, 83);	
-				
-				InfoTextAreaList[curLoc].setText("a");
+				InfoTextAreaList[curLoc].setId("cal");
 				borderPaneList[curLoc].setTop(dateLabelsList[curLoc]);
 				borderPaneList[curLoc].setCenter(InfoTextAreaList[curLoc]);
 				
-			//causes program to not work idk why	//calanderTextAreas.getChildren().add(InfoTextAreaList[curLoc]);
 				
 				calanderPane.add(borderPaneList[curLoc],c,r);
 				
@@ -88,24 +87,36 @@ public class Controller
 			}
 		}
 		
-		
 		setCalanderDates();
 	}
 	
 	//Still unsure about this method
 	private void curCell(int col, int row)
 	{
-        Pane pane = new Pane();
-        pane.setOnMouseClicked(e -> { setSelectedDate(col,row);
-            
-        });
-       calanderPane.add(pane, col, row);
+		
+		Pane pane = new Pane();
+	    pane.setOnMouseClicked(e ->  { 
+	    	
+	    	if(!dateLabelsList[row*7+col].getText().equals("") )
+	    		setSelectedDate(col,row); 
+	    });
+	    
+	   calanderPane.add(pane, col, row);
+	   
+		
     }
 	
 	private void setSelectedDate(int col, int row)
 	{
-		selectedDate = row*7+col;
-		System.out.println(selectedDate);
+		if(selectedDateIndex != -1)
+		{
+			borderPaneList[selectedDateIndex].setStyle("-fx-background-color: none;");
+			InfoTextAreaList[selectedDateIndex].setId("cal");
+		}
+		
+		selectedDateIndex = row*7+col;
+		borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #898989;");
+		InfoTextAreaList[selectedDateIndex].setId("sel");
 	}
 	
 	private void setCalanderDates()
@@ -196,11 +207,10 @@ public class Controller
 	{
 		notesList.getItems().add(sendInfoTextArea.getText() );
 		
-		System.out.println(selectedDate);
-		if(selectedDate != -1)
+		System.out.println(selectedDateIndex);
+		if(selectedDateIndex != -1)
 		{
-			System.out.println(InfoTextAreaList[selectedDate].getText()+"ran");
-			InfoTextAreaList[selectedDate].setText(sendInfoTextArea.getText());
+			InfoTextAreaList[selectedDateIndex].setText(sendInfoTextArea.getText());
 		}
 		
 		sendInfoTextArea.setText("");
