@@ -70,7 +70,7 @@ public class Controller
 				dateLabelsList[curLoc] = new Label("");
 				InfoTextAreaList[curLoc] = new TextArea("");
 				
-				//InfoTextAreaList[curLoc].setEditable(false);
+				InfoTextAreaList[curLoc].setEditable(false);
 				
 				InfoTextAreaList[curLoc].setMaxSize(110, 83);	
 				InfoTextAreaList[curLoc].setId("cal");
@@ -151,6 +151,11 @@ public class Controller
 		selectedDateIndex = row*7+col;
 		borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #898989;");
 		InfoTextAreaList[selectedDateIndex].setId("sel");
+		
+		if(!InfoTextAreaList[selectedDateIndex].getText().equals(""))
+		{
+			populateNotesList();
+		}
 	}
 	
 	//want to name this somthing better
@@ -203,6 +208,12 @@ public class Controller
 			}
 		}
 		
+	}
+	//Need to think of a way to populate existing notes
+	private void populateNotesList()
+	{
+		
+	
 	}
 	
 	private int DayStringToNums(String day)
