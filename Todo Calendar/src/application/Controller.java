@@ -21,6 +21,8 @@ import javafx.scene.layout.VBox;
 public class Controller 
 {
 	
+	//Might want to populate the dates before and after cur month
+	
 	YearMonth curYearMonth = YearMonth.now();
 	
 	
@@ -40,14 +42,16 @@ public class Controller
 	private Label dateLabelsList[] = new Label[42];
 	
 	//Text Area
+	@FXML private TextArea sendInfoTextArea;
 	private TextArea InfoTextAreaList[] = new TextArea[42];
 	
 	@FXML private ListView<String> notesList;
 	
-	@FXML private TextArea sendInfoTextArea;
+	Notes monthNotes[] = new Notes[31];
 
 	
 	private int selectedDateIndex = -1;
+	private int selectedDate = -1;
 	
 	
 	@FXML private void initialize()
@@ -57,6 +61,10 @@ public class Controller
 		curMonth.setText(curYearMonth.getMonth().toString()+" "+curYearMonth.getYear());
 		
 		
+		for(int i =0;i<31;i++)
+		{
+			monthNotes[i] = new Notes();
+		}
 		
 		//Adding labels and Text area to the boxes using borderPane
 		for(int r=0;r<6;r++)
@@ -94,6 +102,9 @@ public class Controller
 		unSelectDate();
 		setCalanderDates();
 		
+		clearMonthNotes();
+		
+		
 	}
 	
 	@FXML private void lastMonth(ActionEvent e)
@@ -103,10 +114,21 @@ public class Controller
 		unSelectDate();
 		setCalanderDates();
 		
+		clearMonthNotes();
 	}
 	
 	@FXML private void assignNote(ActionEvent e)
 	{
+		//System.out.println(selectedDate);
+		if(selectedDate >0)
+		{
+			monthNotes[selectedDate].addNotes(sendInfoTextArea.getText() );
+			populateNotesList();
+		}
+		
+		sendInfoTextArea.setText("");
+		
+		/*
 		notesList.getItems().add(sendInfoTextArea.getText() );
 		
 		System.out.println(selectedDateIndex);
@@ -115,9 +137,13 @@ public class Controller
 			InfoTextAreaList[selectedDateIndex].setText(sendInfoTextArea.getText());
 		}
 		
-		sendInfoTextArea.setText("");
+		
+		*/
+		
+		
 	}
 	
+	//NEED TO WORK ON DELETE
 	@FXML private void deleteNote(ActionEvent e)
 	{
 		notesList.getItems().remove(notesList.getSelectionModel().getSelectedItem());
@@ -139,23 +165,62 @@ public class Controller
 		
     }
 	
+	private void clearMonthNotes()
+	{
+		try
+		{
+			for(int i=0;i<31;i++)
+			{
+				monthNotes[i].clearNotes();
+			}
+		}
+		catch(Exception e)
+		{
+			
+		}
+	}
+	
 	//might want to rename this
 	private void setSelectedDate(int col, int row)
 	{
 		if(selectedDateIndex != -1)
 		{
+			
 			borderPaneList[selectedDateIndex].setStyle("-fx-background-color: none;");
 			InfoTextAreaList[selectedDateIndex].setId("cal");
 		}
 		
-		selectedDateIndex = row*7+col;
-		borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #898989;");
-		InfoTextAreaList[selectedDateIndex].setId("sel");
 		
-		if(!InfoTextAreaList[selectedDateIndex].getText().equals(""))
+		
+		notesList.getItems().clear();
+
+	
+		selectedDateIndex = row*7+col;
+		
+		try
+		{
+
+			//System.out.print(Integer.parseInt(dateLabelsList[selectedDateIndex].getText().substring(1,dateLabelsList[selectedDateIndex].getText().length())) );
+			selectedDate =Integer.parseInt(dateLabelsList[selectedDateIndex].getText().substring(1,dateLabelsList[selectedDateIndex].getText().length()));
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			selectedDate = -1;
+		}
+		
+		//System.out.print(selectedDate);
+		if(selectedDate>0)
 		{
 			populateNotesList();
 		}
+		//System.out.println(selectedDateIndex);
+		borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #898989;");
+		InfoTextAreaList[selectedDateIndex].setId("sel");
+		
+		
+		
 	}
 	
 	//want to name this somthing better
@@ -209,12 +274,24 @@ public class Controller
 		}
 		
 	}
-	//Need to think of a way to populate existing notes
+	
+	//Need to think of a way to populate existing notes ||| Going to do this after figuring out the saving situation 
+	
+	//HAS BUGS DOUBLE PlACE ITEMS
 	private void populateNotesList()
 	{
-		
+		if(!(monthNotes[selectedDate].subNoteIsEmpty()))
+		{
+			for(int i =0; i<monthNotes[selectedDate].lengthOfNotes();i++)
+			{
+				notesList.getItems().add(monthNotes[selectedDate].getSubNoteAt(i));
+				InfoTextAreaList[selectedDateIndex].appendText( monthNotes[selectedDate].getSubNoteAt(i)+"\n" );
+			}
+		}
 	
 	}
+	
+	
 	
 	private int DayStringToNums(String day)
 	{
