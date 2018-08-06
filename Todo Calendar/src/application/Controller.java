@@ -20,10 +20,10 @@ import javafx.scene.layout.VBox;
 
 public class Controller 
 {
-	
-	//Might want to populate the dates before and after cur month
-	
-	YearMonth curYearMonth = YearMonth.now();
+	/* +++General Notes++++++++++++++
+	*   - Might want to populate the dates before and after cur month
+	*
+	*/
 	
 	
 	@FXML private VBox calendarVBox;
@@ -47,6 +47,7 @@ public class Controller
 	
 	@FXML private ListView<String> notesList;
 	
+	YearMonth curYearMonth = YearMonth.now();
 	Notes monthNotes[] = new Notes[31];
 
 	
@@ -119,34 +120,36 @@ public class Controller
 	
 	@FXML private void assignNote(ActionEvent e)
 	{
-		//System.out.println(selectedDate);
-		if(selectedDate >0)
+		try
 		{
 			monthNotes[selectedDate].addNotes(sendInfoTextArea.getText() );
-			populateNotesList();
+			updateNotesList();
+			sendInfoTextArea.setText("");
 		}
-		
-		sendInfoTextArea.setText("");
-		
-		/*
-		notesList.getItems().add(sendInfoTextArea.getText() );
-		
-		System.out.println(selectedDateIndex);
-		if(selectedDateIndex != -1)
+		catch(Exception ex)
 		{
-			InfoTextAreaList[selectedDateIndex].setText(sendInfoTextArea.getText());
+			ex.printStackTrace();
 		}
-		
-		
-		*/
 		
 		
 	}
 	
-	//NEED TO WORK ON DELETE
+
 	@FXML private void deleteNote(ActionEvent e)
 	{
-		notesList.getItems().remove(notesList.getSelectionModel().getSelectedItem());
+		try
+		{
+			System.out.println(notesList.getSelectionModel().getSelectedIndex());
+			monthNotes[selectedDate].removeNotes(notesList.getSelectionModel().getSelectedIndex());
+			InfoTextAreaList[selectedDateIndex].setText("");
+			notesList.getItems().clear();
+			updateNotesList();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		
 	}
 	
 	
@@ -161,8 +164,7 @@ public class Controller
 	    });
 	    
 	   calendarPane.add(pane, col, row);
-	   
-		
+	   	
     }
 	
 	private void clearMonthNotes()
@@ -173,6 +175,8 @@ public class Controller
 			{
 				monthNotes[i].clearNotes();
 			}
+			
+			notesList.getItems().clear();
 		}
 		catch(Exception e)
 		{
@@ -189,20 +193,15 @@ public class Controller
 			borderPaneList[selectedDateIndex].setStyle("-fx-background-color: none;");
 			InfoTextAreaList[selectedDateIndex].setId("cal");
 		}
-		
-		
-		
-		notesList.getItems().clear();
 
-	
+		notesList.getItems().clear();
+		int oldSelectedIndex = selectedDateIndex;
 		selectedDateIndex = row*7+col;
 		
 		try
 		{
-
-			//System.out.print(Integer.parseInt(dateLabelsList[selectedDateIndex].getText().substring(1,dateLabelsList[selectedDateIndex].getText().length())) );
-			selectedDate =Integer.parseInt(dateLabelsList[selectedDateIndex].getText().substring(1,dateLabelsList[selectedDateIndex].getText().length()));
-			
+			selectedDate =Integer.parseInt(dateLabelsList[selectedDateIndex].getText().substring(1,dateLabelsList[selectedDateIndex].getText().length())) -1;
+			updateNotesList();
 		}
 		catch(Exception e)
 		{
@@ -210,17 +209,15 @@ public class Controller
 			selectedDate = -1;
 		}
 		
-		//System.out.print(selectedDate);
-		if(selectedDate>0)
+		if(oldSelectedIndex == row*7+col)
 		{
-			populateNotesList();
+			unSelectDate();
 		}
-		//System.out.println(selectedDateIndex);
-		borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #898989;");
-		InfoTextAreaList[selectedDateIndex].setId("sel");
-		
-		
-		
+		else
+		{
+			borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #898989;");
+			InfoTextAreaList[selectedDateIndex].setId("sel");
+		}
 	}
 	
 	//want to name this somthing better
@@ -275,13 +272,15 @@ public class Controller
 		
 	}
 	
-	//Need to think of a way to populate existing notes ||| Going to do this after figuring out the saving situation 
-	
-	//HAS BUGS DOUBLE PlACE ITEMS
-	private void populateNotesList()
+	//Bug fixed but not very effcient, want appened instead of constantly deleting
+	private void updateNotesList()
 	{
 		if(!(monthNotes[selectedDate].subNoteIsEmpty()))
 		{
+			
+			InfoTextAreaList[selectedDateIndex].setText("");
+			notesList.getItems().clear();
+			
 			for(int i =0; i<monthNotes[selectedDate].lengthOfNotes();i++)
 			{
 				notesList.getItems().add(monthNotes[selectedDate].getSubNoteAt(i));

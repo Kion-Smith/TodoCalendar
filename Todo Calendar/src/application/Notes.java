@@ -20,7 +20,9 @@ public class Notes
 	
 	public void removeNotes(int index)
 	{
+		System.out.println(subNotes.get(index));
 		subNotes.remove(index);
+		
 	}
 	
 	public void clearNotes()
@@ -28,6 +30,8 @@ public class Notes
 		subNotes.clear();
 	
 	}
+	
+
 	
 	public int lengthOfNotes()
 	{
