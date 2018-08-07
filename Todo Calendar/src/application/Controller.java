@@ -1,12 +1,15 @@
 package application;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -158,7 +161,6 @@ public class Controller
 	
 	@FXML private void openFile()
 	{
-		System.out.println("Opened");
 		FileChooser fc = new FileChooser();
 		
 		FileChooser.ExtensionFilter textFileFilter = new FileChooser.ExtensionFilter("Text Files (*.txt)","*.txt");
@@ -189,6 +191,25 @@ public class Controller
 	   calendarPane.add(pane, col, row);
 	   	
     }
+	
+	@FXML private void openAboutWindow()
+	{
+		System.out.println("Opened");
+		Parent root;
+		try 
+		{
+			root = FXMLLoader.load(getClass().getResource("About.fxml"));
+			Stage aboutStage = new Stage();
+			aboutStage.setTitle("About the Calendar app");
+			aboutStage.setScene(new Scene(root,600,400));
+			aboutStage.show();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+			
+		}
+	}
 	
 	private void clearMonthNotes()
 	{
