@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.YearMonth;
 
@@ -15,6 +16,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 
@@ -22,7 +25,7 @@ public class Controller
 {
 	/* +++General Notes++++++++++++++
 	*   - Might want to populate the dates before and after cur month
-	*
+	*	
 	*/
 	
 	
@@ -125,6 +128,7 @@ public class Controller
 			monthNotes[selectedDate].addNotes(sendInfoTextArea.getText() );
 			updateNotesList();
 			sendInfoTextArea.setText("");
+			
 		}
 		catch(Exception ex)
 		{
@@ -152,6 +156,25 @@ public class Controller
 		
 	}
 	
+	@FXML private void openFile()
+	{
+		System.out.println("Opened");
+		FileChooser fc = new FileChooser();
+		
+		FileChooser.ExtensionFilter textFileFilter = new FileChooser.ExtensionFilter("Text Files (*.txt)","*.txt");
+		FileChooser.ExtensionFilter allFilesFilter = new FileChooser.ExtensionFilter("All Files ","*.*");
+		
+		fc.getExtensionFilters().add(textFileFilter);
+		fc.getExtensionFilters().add(allFilesFilter);
+		
+		File selectedFile = fc.showOpenDialog(new Stage());
+	}
+	
+	@FXML private void exitProgram()
+	{
+		//save items then exit
+		System.exit(0);
+	}
 	
 	private void curCell(int col, int row)
 	{
