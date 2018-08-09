@@ -1,8 +1,11 @@
 package application;
 
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
@@ -14,7 +17,10 @@ public class PrefsController
 	@FXML Button applyChangesBtn;
 	@FXML Button resetDefaultBtn;
 	
+	
 	@FXML private ListView<String> SettingsList;
+	
+
 	
 	@FXML private void initialize()
 	{
@@ -22,19 +28,25 @@ public class PrefsController
 	}
 	@FXML private void displayMenu()
 	{
-		
-		if(SettingsList.getSelectionModel().getSelectedIndex() ==0)
+		switch(SettingsList.getSelectionModel().getSelectedIndex())
 		{
-			GeneralSettings gs = new  GeneralSettings();
-			sP.getChildren().add(gs);
-			
-			//SettingsPane.setCenter(gs);
-			//SettingsPane;
-			
+			case 0:
+				GeneralSettingsController gs = new  GeneralSettingsController();
+				sP.getChildren().add(gs);
+				break;
+			default:
+				break;	
 		}
 		
+		/*
+		if(SettingsList.getSelectionModel().getSelectedIndex() ==0)
+		{
+			GeneralSettingsController gs = new  GeneralSettingsController();
+			sP.getChildren().add(gs);
+			
+			
+		}*/
 		
-		//System.out.println(SettingsList.getSelectionModel().getSelectedIndex());
 		
 	}
 }
