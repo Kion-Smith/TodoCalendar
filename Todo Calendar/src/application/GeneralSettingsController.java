@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.util.prefs.Preferences;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +29,10 @@ public class GeneralSettingsController extends AnchorPane
 	@FXML private RadioButton OffRadioBtn;
 	
 	
+	Preferences userPref = Preferences.userRoot();
+	Preferences sysPref = Preferences.systemRoot();
+	
+	
 	public GeneralSettingsController()
 	{
 		System.out.println("ran");
@@ -46,6 +51,7 @@ public class GeneralSettingsController extends AnchorPane
 	
 	@FXML private void initialize()
 	{
+		curDefaultFileLocation.setText( userPref.get("File_Loc", "null"));
 		curDefaultFileLocation.setEditable(false);
 	}
 	
@@ -60,6 +66,10 @@ public class GeneralSettingsController extends AnchorPane
 		fc.getExtensionFilters().add(allFilesFilter);
 		
 		File selectedFile = fc.showOpenDialog(new Stage());
+	
+		userPref.put("File_Loc", selectedFile.getAbsolutePath());
+		curDefaultFileLocation.setText(selectedFile.getAbsolutePath());
+		
 	}
 	
 }
