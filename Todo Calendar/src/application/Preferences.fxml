@@ -12,8 +12,8 @@
   <children>
     <AnchorPane prefHeight="454.0" prefWidth="600.0">
       <children>
-        <Button fx:id="applyChangesBtn" layoutX="489.0" layoutY="365.0" mnemonicParsing="false" text="ApplyChanges" />
-        <Button fx:id="resetDefaultBtn" layoutX="372.0" layoutY="365.0" mnemonicParsing="false" text="Reset to Default" />
+        <Button fx:id="applyChangesBtn" layoutX="489.0" layoutY="365.0" mnemonicParsing="false" text="Apply Changes" />
+        <Button fx:id="resetDefaultBtn" layoutX="372.0" layoutY="365.0" mnemonicParsing="false" onAction="#resetingToDefault" text="Reset to Default" />
         <ListView fx:id="SettingsList" editable="false" layoutX="14.0" layoutY="14.0" onMouseClicked="#displayMenu" orientation="VERTICAL" prefHeight="340.0" prefWidth="150.0">
           <items>
             <FXCollections fx:factory="observableArrayList">

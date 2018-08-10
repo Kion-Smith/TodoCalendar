@@ -20,33 +20,34 @@ public class PrefsController
 	
 	@FXML private ListView<String> SettingsList;
 	
-
+	GeneralSettingsController gs;
 	
 	@FXML private void initialize()
 	{
-	
+		gs = new GeneralSettingsController();
 	}
+	
 	@FXML private void displayMenu()
 	{
 		switch(SettingsList.getSelectionModel().getSelectedIndex())
 		{
 			case 0:
-				GeneralSettingsController gs = new  GeneralSettingsController();
 				sP.getChildren().add(gs);
 				break;
 			default:
 				break;	
 		}
-		
-		/*
-		if(SettingsList.getSelectionModel().getSelectedIndex() ==0)
+	}
+	
+	@FXML void resetingToDefault()
+	{
+		switch(SettingsList.getSelectionModel().getSelectedIndex())
 		{
-			GeneralSettingsController gs = new  GeneralSettingsController();
-			sP.getChildren().add(gs);
-			
-			
-		}*/
-		
-		
+			case 0:
+				gs.resetSettings();
+				break;
+			default:
+				break;
+		}
 	}
 }

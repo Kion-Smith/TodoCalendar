@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.prefs.Preferences;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -61,8 +62,38 @@ public class CalendarController
 	private int selectedDate = -1;
 	
 	
+	private void loadData()
+	{
+		//have some way to parse data from xml file here
+		
+		Preferences userPref = Preferences.userRoot();
+		
+		if(userPref.get("File_Loc", "null").equals("null"))
+		{
+			File calanderDataFile = new File("CalanderInfo.txt");
+			try {
+				calanderDataFile.createNewFile();
+				userPref.put("File_Loc", calanderDataFile.getAbsolutePath());
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			//read data
+		}
+		
+		
+		
+	}
+	
 	@FXML private void initialize()
 	{
+		
+		
+		loadData();
 		
 		//Set Month to the current month
 		curMonth.setText(curYearMonth.getMonth().toString()+" "+curYearMonth.getYear());

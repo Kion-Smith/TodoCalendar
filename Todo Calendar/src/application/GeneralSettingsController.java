@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.prefs.Preferences;
 
 import javafx.fxml.FXML;
@@ -20,22 +21,18 @@ public class GeneralSettingsController extends AnchorPane
 	@FXML private Button savingLocation;
 	@FXML private Button SelectFileButton;
 	
-	///cant seem to set this in scene builder
-	@FXML private ToggleGroup OnOffGroup;
-	
 	@FXML private TextField curDefaultFileLocation;
 	
 	@FXML private RadioButton OnRadioBtn;
 	@FXML private RadioButton OffRadioBtn;
 	
+	File selectedFile;
+	boolean isAutoSaving;
 	
 	Preferences userPref = Preferences.userRoot();
-	Preferences sysPref = Preferences.systemRoot();
-	
 	
 	public GeneralSettingsController()
 	{
-		System.out.println("ran");
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GeneralSettings.fxml"));
 		
 		fxmlLoader.setRoot(this);
@@ -65,11 +62,44 @@ public class GeneralSettingsController extends AnchorPane
 		fc.getExtensionFilters().add(textFileFilter);
 		fc.getExtensionFilters().add(allFilesFilter);
 		
-		File selectedFile = fc.showOpenDialog(new Stage());
-	
-		userPref.put("File_Loc", selectedFile.getAbsolutePath());
+		selectedFile = fc.showOpenDialog(new Stage());
 		curDefaultFileLocation.setText(selectedFile.getAbsolutePath());
 		
+	}
+/* Need to think of awya of saving the radio btn states
+	@FXML private void settingOn()
+	{
+		isAutoSaving = true;
+	}
+	
+	@FXML private void settingOff()
+	{
+		isAutoSaving = false;
+	}
+*/
+	public void resetSettings()
+	{
+		userPref.remove("File_Loc");
+		File calanderDataFile = new File("CalanderInfo.txt");
+		try {
+			calanderDataFile.createNewFile();
+			userPref.put("File_Loc", calanderDataFile.getAbsolutePath());
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		curDefaultFileLocation.setText(calanderDataFile.getAbsolutePath());
+		OnRadioBtn.setSelected(true);
+	}
+	
+	public void applySettings()
+	{
+		
+		userPref.put("File_Loc", selectedFile.getAbsolutePath());
+		curDefaultFileLocation.setText(selectedFile.getAbsolutePath());
+				
 	}
 	
 }
