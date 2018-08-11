@@ -28,6 +28,7 @@ public class GeneralSettingsController extends AnchorPane
 	
 	File selectedFile;
 	boolean isAutoSaving;
+	boolean hasChanged;
 	
 	Preferences userPref = Preferences.userRoot();
 	
@@ -66,17 +67,21 @@ public class GeneralSettingsController extends AnchorPane
 		curDefaultFileLocation.setText(selectedFile.getAbsolutePath());
 		
 	}
-/* Need to think of awya of saving the radio btn states
+
+	/*
 	@FXML private void settingOn()
 	{
 		isAutoSaving = true;
+		hasChanged = true;
 	}
 	
 	@FXML private void settingOff()
 	{
 		isAutoSaving = false;
+		hasChanged = true;
 	}
-*/
+	*/
+
 	public void resetSettings()
 	{
 		userPref.remove("File_Loc");
@@ -96,7 +101,16 @@ public class GeneralSettingsController extends AnchorPane
 	
 	public void applySettings()
 	{
-		
+		/*
+		if(hasChanged && isAutoSaving)
+		{
+			OnRadioBtn.setSelected(true);
+		}
+		else if (hasChanged && !isAutoSaving)
+		{
+			OffRadioBtn.setSelected(true);
+		}
+		*/
 		userPref.put("File_Loc", selectedFile.getAbsolutePath());
 		curDefaultFileLocation.setText(selectedFile.getAbsolutePath());
 				
