@@ -1,0 +1,12 @@
+
+#cal, #cal .content 
+{
+    -fx-background-color: transparent;
+}
+
+
+#sel, #sel .content 
+{
+    -fx-background-color: #898989;
+    -fx-background-radius: 0;
+}

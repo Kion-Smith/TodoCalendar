@@ -1,4 +1,4 @@
-package application;
+package Calendar;
 
 import java.io.File;
 import java.io.IOException;
@@ -228,7 +228,7 @@ public class CalendarController
 		Parent root;
 		try 
 		{
-			root = FXMLLoader.load(getClass().getResource("About.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/MenuItems/About.fxml"));
 			Stage aboutStage = new Stage();
 			aboutStage.setTitle("About the Calendar app");
 			aboutStage.setScene(new Scene(root,600,400));
@@ -246,7 +246,7 @@ public class CalendarController
 		Parent root;
 		try 
 		{
-			root = FXMLLoader.load(getClass().getResource("Preferences.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/MenuItems/Preferences.fxml"));
 			Stage aboutStage = new Stage();
 			aboutStage.setTitle("Preferences");
 			aboutStage.setScene(new Scene(root,600,400));

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="calendarVBox" prefHeight="768.0" prefWidth="1280.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.CalendarController">
+<VBox fx:id="calendarVBox" prefHeight="768.0" prefWidth="1280.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Calendar.CalendarController">
   <AnchorPane prefHeight="323.0" prefWidth="688.0">
     <children>
       <MenuBar layoutX="0.0" layoutY="0.0" prefWidth="1280.0">
@@ -103,6 +103,6 @@
     </children>
   </AnchorPane>
   <stylesheets>
-    <URL value="@style.css" />
+    <URL value="@../Styles/style.css" />
   </stylesheets>
 </VBox>
