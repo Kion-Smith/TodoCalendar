@@ -26,10 +26,8 @@ public class GeneralSettingsController extends AnchorPane
 	@FXML private RadioButton OnRadioBtn;
 	@FXML private RadioButton OffRadioBtn;
 	
-	File selectedFile;
-	boolean isAutoSaving;
-	boolean hasChanged;
-	
+	private File selectedFile;
+
 	Preferences userPref = Preferences.userRoot();
 	
 	public GeneralSettingsController()
@@ -51,6 +49,16 @@ public class GeneralSettingsController extends AnchorPane
 	{
 		curDefaultFileLocation.setText( userPref.get("File_Loc", "null"));
 		curDefaultFileLocation.setEditable(false);
+		
+		if(userPref.get("radioBtnState", "on").equals("on") )
+		{
+			OnRadioBtn.setSelected(true);
+		}
+		else if(userPref.get("radioBtnState", "off").equals("off") )
+		{
+			OffRadioBtn.setSelected(true);
+		}
+		
 	}
 	
 	@FXML private void changeFileLocation()
@@ -71,16 +79,17 @@ public class GeneralSettingsController extends AnchorPane
 	/*
 	@FXML private void settingOn()
 	{
-		isAutoSaving = true;
-		hasChanged = true;
+		OnButtonState = true;
+		OffButtonState = false;
 	}
 	
 	@FXML private void settingOff()
 	{
-		isAutoSaving = false;
-		hasChanged = true;
+		OffButtonState = true;
+		OnButtonState = false;
 	}
 	*/
+	
 
 	public void resetSettings()
 	{
@@ -96,23 +105,34 @@ public class GeneralSettingsController extends AnchorPane
 		}
 		
 		curDefaultFileLocation.setText(calanderDataFile.getAbsolutePath());
+		
 		OnRadioBtn.setSelected(true);
+		userPref.put("radioBtnState", "on");
 	}
 	
 	public void applySettings()
 	{
-		/*
-		if(hasChanged && isAutoSaving)
+		if(OnRadioBtn.isSelected())
 		{
-			OnRadioBtn.setSelected(true);
+			userPref.put("radioBtnState", "on");
 		}
-		else if (hasChanged && !isAutoSaving)
+		else if(OffRadioBtn.isSelected())
 		{
-			OffRadioBtn.setSelected(true);
+			userPref.put("radioBtnState","off");
 		}
-		*/
-		userPref.put("File_Loc", selectedFile.getAbsolutePath());
-		curDefaultFileLocation.setText(selectedFile.getAbsolutePath());
+
+		
+		try
+		{
+			userPref.put("File_Loc", selectedFile.getAbsolutePath());
+			curDefaultFileLocation.setText(selectedFile.getAbsolutePath());
+		}
+		catch(Exception e)
+		{
+			userPref.put("File_Loc", curDefaultFileLocation.getText());
+		}
+	
+	
 				
 	}
 	

@@ -50,4 +50,16 @@ public class PrefsController
 				break;
 		}
 	}
+	
+	@FXML void applyChanges()
+	{
+		switch(SettingsList.getSelectionModel().getSelectedIndex())
+		{
+			case 0:
+				gs.applySettings();
+				break;
+			default:
+				break;
+		}
+	}
 }
