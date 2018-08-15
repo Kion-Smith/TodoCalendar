@@ -76,21 +76,6 @@ public class GeneralSettingsController extends AnchorPane
 		
 	}
 
-	/*
-	@FXML private void settingOn()
-	{
-		OnButtonState = true;
-		OffButtonState = false;
-	}
-	
-	@FXML private void settingOff()
-	{
-		OffButtonState = true;
-		OnButtonState = false;
-	}
-	*/
-	
-
 	public void resetSettings()
 	{
 		userPref.remove("File_Loc");
