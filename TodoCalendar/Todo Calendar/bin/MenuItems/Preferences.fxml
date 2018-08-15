@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MenuItems.PrefsController">
+  <children>
+    <AnchorPane prefHeight="454.0" prefWidth="600.0">
+      <children>
+        <Button fx:id="applyChangesBtn" layoutX="489.0" layoutY="365.0" mnemonicParsing="false" onAction="#applyChanges" text="Apply Changes" />
+        <Button fx:id="resetDefaultBtn" layoutX="372.0" layoutY="365.0" mnemonicParsing="false" onAction="#resetingToDefault" text="Reset to Default" />
+        <ListView fx:id="SettingsList" editable="false" layoutX="14.0" layoutY="14.0" onMouseClicked="#displayMenu" orientation="VERTICAL" prefHeight="340.0" prefWidth="150.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="General" />
+            </FXCollections>
+          </items>
+        </ListView>
+        <Pane id="SettingsPane" fx:id="sP" layoutX="186.0" layoutY="14.0" prefHeight="340.0" prefWidth="400.0" style="-fx-border-color:gray; -fx-border-width: 1; -fx-border-style: solid;">
+          <children>
+            <BorderPane fx:id="SettingsPane" layoutX="0.0" layoutY="0.0" prefHeight="340.0" prefWidth="400.0" />
+          </children>
+        </Pane>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
