@@ -57,6 +57,8 @@ public class CalendarController
 	YearMonth curYearMonth = YearMonth.now();
 	Notes monthNotes[] = new Notes[31];
 
+	private final int CURMONTH = LocalDate.now().getMonthValue();
+	private final int CURDAY = LocalDate.now().getDayOfMonth();
 	
 	private int selectedDateIndex = -1;
 	private int selectedDate = -1;
@@ -65,7 +67,6 @@ public class CalendarController
 	private void loadData()
 	{
 		//have some way to parse data from xml file here
-		
 		Preferences userPref = Preferences.userRoot();
 		
 		if(userPref.get("File_Loc", "null").equals("null"))
@@ -341,6 +342,7 @@ public class CalendarController
 			{	
 				int curLoc = r*7+c;
 				
+				
 				if(curLoc >= start && count <= end)
 				{
 					borderPaneList[curLoc].setStyle("-fx-background-color: none");
@@ -358,6 +360,14 @@ public class CalendarController
 					
 				}
 				
+				
+				if(count-1 == CURDAY && CURMONTH == startDate.getMonthValue())
+				{
+					borderPaneList[curLoc].setStyle("-fx-background-color: #6d6d6d");
+					dateLabelsList[curLoc].setText(" "+ (count-1) );
+					InfoTextAreaList[curLoc].setId("cur");
+					InfoTextAreaList[curLoc].setText("");
+				}
 				
 			}
 		}
