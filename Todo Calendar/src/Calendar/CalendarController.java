@@ -59,9 +59,11 @@ public class CalendarController
 
 	private final int CURMONTH = LocalDate.now().getMonthValue();
 	private final int CURDAY = LocalDate.now().getDayOfMonth();
+	private final int CURYEAR = LocalDate.now().getYear();
 	
 	private int selectedDateIndex = -1;
 	private int selectedDate = -1;
+	
 	
 	
 	private void loadData()
@@ -282,9 +284,16 @@ public class CalendarController
 	{
 		if(selectedDateIndex != -1)
 		{
-			
-			borderPaneList[selectedDateIndex].setStyle("-fx-background-color: none;");
-			InfoTextAreaList[selectedDateIndex].setId("cal");
+			if(CURDAY-1 == selectedDate && CURMONTH == curYearMonth.getMonthValue() && CURYEAR == curYearMonth.getYear())
+			{
+				borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #6d6d6d;");
+				InfoTextAreaList[selectedDateIndex].setId("cur");
+			}
+			else
+			{
+				borderPaneList[selectedDateIndex].setStyle("-fx-background-color: none;");
+				InfoTextAreaList[selectedDateIndex].setId("cal");
+			}
 		}
 
 		notesList.getItems().clear();
@@ -316,12 +325,21 @@ public class CalendarController
 	//want to name this somthing better
 	private void unSelectDate()
 	{
-
+		
 		if(selectedDateIndex>-1)
 		{
-			borderPaneList[selectedDateIndex].setStyle("-fx-background-color: none;");
-			InfoTextAreaList[selectedDateIndex].setId("cal");
-			selectedDateIndex = -1;
+			
+			if(CURDAY-1 == selectedDate && CURMONTH == curYearMonth.getMonthValue() && CURYEAR == curYearMonth.getYear())
+			{
+				borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #6d6d6d;");
+				InfoTextAreaList[selectedDateIndex].setId("cur");
+			}
+			else
+			{
+				borderPaneList[selectedDateIndex].setStyle("-fx-background-color: none;");
+				InfoTextAreaList[selectedDateIndex].setId("cal");
+				selectedDateIndex = -1;
+			}
 		}
 
 	}
@@ -348,6 +366,7 @@ public class CalendarController
 					borderPaneList[curLoc].setStyle("-fx-background-color: none");
 					dateLabelsList[curLoc].setText(" "+ (count) );
 					InfoTextAreaList[curLoc].setText("");
+					InfoTextAreaList[curLoc].setId("cal");
 					
 					count++;
 				}
@@ -360,14 +379,22 @@ public class CalendarController
 					
 				}
 				
-				
-				if(count-1 == CURDAY && CURMONTH == startDate.getMonthValue())
+				if(count-1 == CURDAY && CURMONTH == curYearMonth.getMonthValue() && CURYEAR == curYearMonth.getYear())
 				{
 					borderPaneList[curLoc].setStyle("-fx-background-color: #6d6d6d");
 					dateLabelsList[curLoc].setText(" "+ (count-1) );
 					InfoTextAreaList[curLoc].setId("cur");
 					InfoTextAreaList[curLoc].setText("");
+					
+
 				}
+				
+				
+			
+				
+				
+				
+
 				
 			}
 		}
@@ -389,6 +416,7 @@ public class CalendarController
 				InfoTextAreaList[selectedDateIndex].appendText( monthNotes[selectedDate].getSubNoteAt(i)+"\n" );
 			}
 		}
+		
 	
 	}
 	
