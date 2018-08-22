@@ -1,0 +1,35 @@
+
+//idea for json
+{
+	"month":"some month"
+	
+	{
+		"date": some number value
+		//then the list array
+	}
+
+}
+
+//xml
+
+<?xml version ="1.0">
+
+<Cal>
+	<Year>
+		<Date>
+			<List Information> </List Information>
+			<List Information> </List Information>
+		</Date>	
+	</Year>
+</Cal>
+
+
+
+???/////????
+I like xml more
+	- its readable
+	- its simple to make
+
+I Like json because
+	- it doesnt need to check for as much (i.e quicker)
+	- easier to debug
