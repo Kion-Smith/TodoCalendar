@@ -1,4 +1,8 @@
 
+I can make my own file format, that acts similar to json files
+
+
+////////////////////////
 //idea for json
 {
 	"month":"some month"
