@@ -48,6 +48,16 @@ public class CalendarData
 		return day;
 	}
 	
+	public boolean isIdenticalDate(int y,int m,int d)
+	{
+		if( year == y && month == m && day == d)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public String toString()
 	{
 		String temp = "["+year+"/"+month+"/"+day+"]:{";

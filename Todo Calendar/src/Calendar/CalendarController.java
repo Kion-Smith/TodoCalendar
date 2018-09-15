@@ -64,7 +64,8 @@ public class CalendarController
 	private int selectedDateIndex = -1;
 	private int selectedDate = -1;
 	
-	
+	FileData pastFileData;
+	FileData curFileData;
 	
 	private void loadData()
 	{
@@ -86,6 +87,13 @@ public class CalendarController
 		else
 		{
 			//read data
+			
+			System.out.println(userPref.get("File_Loc", "null"));
+			File curFile = new File(userPref.get("File_Loc", "null"));
+			FileData curFileData= new FileData(curFile);
+			curFileData.initializeData();
+			
+			//curFileData = new FileData(userPref.get("File_loc","null"));
 		}
 		
 		
@@ -389,12 +397,6 @@ public class CalendarController
 
 				}
 				
-				
-			
-				
-				
-				
-
 				
 			}
 		}
