@@ -1,46 +1,61 @@
 package Calendar;
 
-import java.io.File;
+import java.util.ArrayList;
 
 public class CalendarData 
 {
+	private int year;
+	private int month;
+	private int day;
 	
-
-	// might want to save user data with an xml file or some other markup language
-	// need to save the month, the date, the year and all the information
-	// Prioritize close distances when talking about events in the future, and then things in the far future, and then finally events that have already happened
+	ArrayList<String> Notes = new ArrayList();
 	
-	//thinking about json or xml still looking
-	
-	File curCalander;
-	String[] curDataList;
-	
-	public CalendarData()
+	public CalendarData(int y, int m,int d)
 	{
-		
+		year =y;
+		month =m;
+		day = d;
 	}
 	
-	public CalendarData(File f)
+	//setters
+	public void setYear(int y)
 	{
-		curCalander =f;
+		year =y;
+	}
+	public void setMonth(int m)
+	{
+		month =m;
+	}
+	public void setDay(int d)
+	{
+		day =d;
+	}
+	public void addToNotesList(String s)
+	{
+		Notes.add(s);
+	}
+	//getters
+	public int getYear()
+	{
+		return year;
+	}
+	public int getMonth()
+	{
+		return month;
+	}
+	public int getDay()
+	{
+		return day;
 	}
 	
-	public void readData() 
+	public String toString()
 	{
-		
-	}
-	
-	
-	
-	public void writeData() 
-	{
-		
-		
-	}
-	
-	public String[] getDateDataList()
-	{
-		
-		return curDataList;
+		String temp = "["+year+"/"+month+"/"+day+"]:{";
+		for(int i=0;i<Notes.size();i++)
+		{
+			temp+= "\""+Notes.get(i).toString() +"\";";
+		}
+		temp+="}";
+		return temp;
 	}
 }

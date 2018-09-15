@@ -18,20 +18,33 @@
             <Font name="System Bold" size="16.0" />
           </font>
         </Text>
-        <Text layoutX="14.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is a calendar application is made by Kion Smith, as project to learn about fxml &amp; JavaFx.">
-          <font>
-            <Font size="14.0" fx:id="x1" />
-          </font>
-        </Text>
-        <Text font="$x1" layoutX="14.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You can find the source code at https://github.com/Kion-Smith/TodoCalendar" />
-        <Text font="$x1" layoutX="14.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This app is used to store information to corrisponding dates" />
         <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="420.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true">
           <image>
             <Image url="@../Resources/30888048.png" />
           </image>
         </ImageView>
-        <Text layoutX="15.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Might add more text, unsure" />
         <Separator layoutX="14.0" layoutY="47.0" prefWidth="568.01171875" />
+        <GridPane layoutX="14.0" layoutY="69.0" prefHeight="131.0" prefWidth="569.0">
+          <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This app is used to store information to corrisponding dates" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <font>
+                <Font size="14.0" fx:id="x1" />
+              </font>
+            </Text>
+            <Text font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="This is a calendar application is made by Kion Smith, as project to learn about fxml &amp; JavaFx." GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Text font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="You can find the source code at https://github.com/Kion-Smith/TodoCalendar" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Might add more text, unsure" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
       </children>
     </AnchorPane>
   </children>
