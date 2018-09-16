@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.prefs.Preferences;
 
 import javafx.event.ActionEvent;
@@ -67,6 +68,9 @@ public class CalendarController
 	FileData pastFileData;
 	FileData curFileData;
 	
+	ArrayList<CalendarData> currentCalendar;
+	ArrayList<CalendarData> pastCalendar;
+	
 	private void loadData()
 	{
 		//have some way to parse data from xml file here
@@ -103,6 +107,8 @@ public class CalendarController
 	@FXML private void initialize()
 	{
 		
+		currentCalendar =new ArrayList();
+		pastCalendar=new ArrayList();
 		
 		loadData();
 		
@@ -134,11 +140,11 @@ public class CalendarController
 				borderPaneList[curLoc].setTop(dateLabelsList[curLoc]);
 				borderPaneList[curLoc].setCenter(InfoTextAreaList[curLoc]);
 				
-				
+
 				calendarPane.add(borderPaneList[curLoc],c,r);
 				
 				curCell(c,r);
-				
+					
 			}
 		}
 		
@@ -171,9 +177,25 @@ public class CalendarController
 		try
 		{
 			monthNotes[selectedDate].addNotes(sendInfoTextArea.getText() );
+			
+			//will orginize how stuff when saving not while entering
+			for(int i=0;i<currentCalendar.size();i++)
+			{
+				if(currentCalendar.get(i).isIdenticalDate(curYearMonth.getYear(), curYearMonth.getMonthValue(), selectedDate))
+				{
+					currentCalendar.get(i).addToNotesList(sendInfoTextArea.getText());
+				}
+				//this could have errors in it
+				else if( i==currentCalendar.size() -1)
+				{
+					currentCalendar.add( new CalendarData(curYearMonth.getYear(), curYearMonth.getMonthValue(), selectedDate));
+					currentCalendar.get(i+1).addToNotesList(sendInfoTextArea.getText());
+				}
+			}
+			
 			updateNotesList();
 			sendInfoTextArea.setText("");
-			
+		
 		}
 		catch(Exception ex)
 		{
@@ -296,6 +318,7 @@ public class CalendarController
 			{
 				borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #6d6d6d;");
 				InfoTextAreaList[selectedDateIndex].setId("cur");
+				
 			}
 			else
 			{

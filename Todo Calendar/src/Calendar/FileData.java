@@ -21,11 +21,6 @@ public class FileData
 	
 	ArrayList<CalendarData> calendarList = new ArrayList();
 	
-	public FileData()
-	{
-		
-	}
-	
 	public FileData(File f)
 	{
 		curCalendar =f;
