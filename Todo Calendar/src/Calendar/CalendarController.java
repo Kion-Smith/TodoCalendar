@@ -56,7 +56,7 @@ public class CalendarController
 	@FXML private ListView<String> notesList;
 	
 	YearMonth curYearMonth = YearMonth.now();
-	Notes monthNotes[] = new Notes[31];
+	//Notes monthNotes[] = new Notes[31];
 
 	private final int CURMONTH = LocalDate.now().getMonthValue();
 	private final int CURDAY = LocalDate.now().getDayOfMonth();
@@ -115,11 +115,12 @@ public class CalendarController
 		//Set Month to the current month
 		curMonth.setText(curYearMonth.getMonth().toString()+" "+curYearMonth.getYear());
 		
-		
+		/*
 		for(int i =0;i<31;i++)
 		{
 			monthNotes[i] = new Notes();
 		}
+		*/
 		
 		//Adding labels and Text area to the boxes using borderPane
 		for(int r=0;r<6;r++)
@@ -176,6 +177,25 @@ public class CalendarController
 	{
 		try
 		{
+			
+			int index = checkForDate(currentCalendar);
+			if(index != -1)
+			{
+				currentCalendar.get(index).addToNotesList(sendInfoTextArea.getText());
+			}
+			else if(index == -1)
+			{
+				CalendarData tempData = new CalendarData(curYearMonth.getYear(), curYearMonth.getMonthValue(), selectedDate);
+				currentCalendar.add(tempData);
+				tempData.addToNotesList(sendInfoTextArea.getText());
+			}
+			
+			//InfoTextAreaList[selectedDateIndex].appendText("-"+sendInfoTextArea.getText() +"\n");
+			//notesList.getItems().add(sendInfoTextArea.getText());
+			updateNotesList();
+			sendInfoTextArea.setText("");
+			
+			/*
 			monthNotes[selectedDate].addNotes(sendInfoTextArea.getText() );
 			
 			//will orginize how stuff when saving not while entering
@@ -195,6 +215,7 @@ public class CalendarController
 			
 			updateNotesList();
 			sendInfoTextArea.setText("");
+			*/
 		
 		}
 		catch(Exception ex)
@@ -210,17 +231,43 @@ public class CalendarController
 	{
 		try
 		{
+			
 			System.out.println(notesList.getSelectionModel().getSelectedIndex());
+			int index = checkForDate(currentCalendar);
+			if(index != -1)
+			{
+				currentCalendar.get(index).removeFromNotesList(notesList.getSelectionModel().getSelectedIndex());
+			}
+			
+			/*
 			monthNotes[selectedDate].removeNotes(notesList.getSelectionModel().getSelectedIndex());
 			InfoTextAreaList[selectedDateIndex].setText("");
 			notesList.getItems().clear();
 			updateNotesList();
+			*/
 		}
 		catch(Exception ex)
 		{
 			ex.printStackTrace();
 		}
 		
+	}
+	
+	private int checkForDate(ArrayList list)
+	{
+		if(!list.isEmpty())
+		{
+			for(int i =0;i<currentCalendar.size();i++)
+			{
+				if(currentCalendar.get(i).isIdenticalDate(curYearMonth.getYear(), curYearMonth.getMonthValue(), selectedDate))
+				{
+					return i;
+				}
+			}
+			
+		}
+		
+		return -1;
 	}
 	
 	@FXML private void openFile()
@@ -238,7 +285,7 @@ public class CalendarController
 	
 	@FXML private void exitProgram()
 	{
-		//save items then exit
+		//save items then exit (pop up window that asks this)
 		System.exit(0);
 	}
 	
@@ -296,12 +343,14 @@ public class CalendarController
 	{
 		try
 		{
+			/*
 			for(int i=0;i<31;i++)
 			{
 				monthNotes[i].clearNotes();
 			}
 			
 			notesList.getItems().clear();
+			*/
 		}
 		catch(Exception e)
 		{
@@ -334,6 +383,7 @@ public class CalendarController
 		try
 		{
 			selectedDate =Integer.parseInt(dateLabelsList[selectedDateIndex].getText().substring(1,dateLabelsList[selectedDateIndex].getText().length())) -1;
+			//cause of error
 			updateNotesList();
 		}
 		catch(Exception e)
@@ -379,6 +429,7 @@ public class CalendarController
 	
 	private void setCalanderDates()
 	{
+		//in here load data from file
 		LocalDate startDate = LocalDate.of(curYearMonth.getYear(),curYearMonth.getMonth(),1);
 		
 		int start = DayStringToNums(startDate.getDayOfWeek().toString());
@@ -429,6 +480,7 @@ public class CalendarController
 	//Bug fixed but not very effcient, want appened instead of constantly deleting
 	private void updateNotesList()
 	{
+		/*
 		if(!(monthNotes[selectedDate].subNoteIsEmpty()))
 		{
 			
@@ -441,7 +493,19 @@ public class CalendarController
 				InfoTextAreaList[selectedDateIndex].appendText( monthNotes[selectedDate].getSubNoteAt(i)+"\n" );
 			}
 		}
-		
+		*/
+		int index = checkForDate(currentCalendar);
+		System.out.println(index);
+		if(!currentCalendar.get(index).isNotesListEmpty())
+		{
+			notesList.getItems().clear();
+			
+			for(int i =0; i<currentCalendar.get(index).Notes.size();i++)
+			{
+				notesList.getItems().add(currentCalendar.get(index).Notes.get(i));
+				InfoTextAreaList[selectedDateIndex].appendText("-"+currentCalendar.get(index).Notes.get(i)+"\n" );
+			}
+		}
 	
 	}
 	

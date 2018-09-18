@@ -34,6 +34,14 @@ public class CalendarData
 	{
 		Notes.add(s);
 	}
+	public void removeFromNotesList(int index)
+	{
+		Notes.remove(index);
+	}
+	public boolean isNotesListEmpty()
+	{
+		return Notes.isEmpty();
+	}
 	//getters
 	public int getYear()
 	{
