@@ -97,7 +97,7 @@ public class CalendarController
 			FileData curFileData= new FileData(curFile);
 			curFileData.initializeData();
 			
-			//curFileData = new FileData(userPref.get("File_loc","null"));
+			
 		}
 		
 		
@@ -115,12 +115,7 @@ public class CalendarController
 		//Set Month to the current month
 		curMonth.setText(curYearMonth.getMonth().toString()+" "+curYearMonth.getYear());
 		
-		/*
-		for(int i =0;i<31;i++)
-		{
-			monthNotes[i] = new Notes();
-		}
-		*/
+	
 		
 		//Adding labels and Text area to the boxes using borderPane
 		for(int r=0;r<6;r++)
@@ -151,16 +146,14 @@ public class CalendarController
 		
 		setCalanderDates();
 	}
+	
 	@FXML private void nextMonth(ActionEvent e)
 	{
 		curYearMonth = curYearMonth.plusMonths(1);
 		curMonth.setText(curYearMonth.getMonth().toString()+" "+curYearMonth.getYear());
 		unSelectDate();
 		setCalanderDates();
-		
-		clearMonthNotes();
-		
-		
+	
 	}
 	
 	@FXML private void lastMonth(ActionEvent e)
@@ -169,8 +162,6 @@ public class CalendarController
 		curMonth.setText(curYearMonth.getMonth().toString()+" "+curYearMonth.getYear());
 		unSelectDate();
 		setCalanderDates();
-		
-		clearMonthNotes();
 	}
 	
 	@FXML private void assignNote(ActionEvent e)
@@ -178,7 +169,7 @@ public class CalendarController
 		try
 		{
 			
-			int index = checkForDate(currentCalendar);
+			int index = checkForDate(currentCalendar, selectedDate);
 			if(index != -1)
 			{
 				currentCalendar.get(index).addToNotesList(sendInfoTextArea.getText());
@@ -190,36 +181,13 @@ public class CalendarController
 				tempData.addToNotesList(sendInfoTextArea.getText());
 			}
 			
-			//InfoTextAreaList[selectedDateIndex].appendText("-"+sendInfoTextArea.getText() +"\n");
-			//notesList.getItems().add(sendInfoTextArea.getText());
 			updateNotesList();
 			sendInfoTextArea.setText("");
-			
-			/*
-			monthNotes[selectedDate].addNotes(sendInfoTextArea.getText() );
-			
-			//will orginize how stuff when saving not while entering
-			for(int i=0;i<currentCalendar.size();i++)
-			{
-				if(currentCalendar.get(i).isIdenticalDate(curYearMonth.getYear(), curYearMonth.getMonthValue(), selectedDate))
-				{
-					currentCalendar.get(i).addToNotesList(sendInfoTextArea.getText());
-				}
-				//this could have errors in it
-				else if( i==currentCalendar.size() -1)
-				{
-					currentCalendar.add( new CalendarData(curYearMonth.getYear(), curYearMonth.getMonthValue(), selectedDate));
-					currentCalendar.get(i+1).addToNotesList(sendInfoTextArea.getText());
-				}
-			}
-			
-			updateNotesList();
-			sendInfoTextArea.setText("");
-			*/
-		
+			System.out.println(selectedDateIndex);
 		}
 		catch(Exception ex)
 		{
+			//
 			ex.printStackTrace();
 		}
 		
@@ -233,33 +201,31 @@ public class CalendarController
 		{
 			
 			System.out.println(notesList.getSelectionModel().getSelectedIndex());
-			int index = checkForDate(currentCalendar);
-			if(index != -1)
+			int index = checkForDate(currentCalendar,selectedDate);
+			
+			if(index != -1 )
 			{
 				currentCalendar.get(index).removeFromNotesList(notesList.getSelectionModel().getSelectedIndex());
 			}
 			
-			/*
-			monthNotes[selectedDate].removeNotes(notesList.getSelectionModel().getSelectedIndex());
-			InfoTextAreaList[selectedDateIndex].setText("");
-			notesList.getItems().clear();
 			updateNotesList();
-			*/
+
 		}
 		catch(Exception ex)
 		{
+			//this will throw a error if notes list is empty
 			ex.printStackTrace();
 		}
 		
 	}
 	
-	private int checkForDate(ArrayList list)
+	private int checkForDate(ArrayList<CalendarData> list, int date)
 	{
 		if(!list.isEmpty())
 		{
 			for(int i =0;i<currentCalendar.size();i++)
 			{
-				if(currentCalendar.get(i).isIdenticalDate(curYearMonth.getYear(), curYearMonth.getMonthValue(), selectedDate))
+				if(currentCalendar.get(i).isIdenticalDate(curYearMonth.getYear(), curYearMonth.getMonthValue(), date))
 				{
 					return i;
 				}
@@ -339,25 +305,7 @@ public class CalendarController
 		}
 	}
 	
-	private void clearMonthNotes()
-	{
-		try
-		{
-			/*
-			for(int i=0;i<31;i++)
-			{
-				monthNotes[i].clearNotes();
-			}
-			
-			notesList.getItems().clear();
-			*/
-		}
-		catch(Exception e)
-		{
-			
-		}
-	}
-	
+
 	//might want to rename this
 	private void setSelectedDate(int col, int row)
 	{
@@ -445,10 +393,34 @@ public class CalendarController
 				
 				if(curLoc >= start && count <= end)
 				{
+					
+					
 					borderPaneList[curLoc].setStyle("-fx-background-color: none");
 					dateLabelsList[curLoc].setText(" "+ (count) );
 					InfoTextAreaList[curLoc].setText("");
 					InfoTextAreaList[curLoc].setId("cal");
+					
+					if(count == CURDAY && CURMONTH == curYearMonth.getMonthValue() && CURYEAR == curYearMonth.getYear())
+					{
+						borderPaneList[curLoc].setStyle("-fx-background-color: #6d6d6d");
+						InfoTextAreaList[curLoc].setId("cur");
+						
+
+					}
+					
+					int index = checkForDate(currentCalendar,count-1);
+					
+					if(index != -1)
+					{
+						InfoTextAreaList[curLoc].setText("");
+						for(int i =0;i<currentCalendar.get(index).Notes.size();i++)
+						{
+							System.out.println("ran");
+							InfoTextAreaList[curLoc].appendText("-"+currentCalendar.get(index).Notes.get(i)+"\n");
+						}
+					}
+					
+
 					
 					count++;
 				}
@@ -459,17 +431,15 @@ public class CalendarController
 					borderPaneList[curLoc].setStyle("-fx-background-color: #F3F3F3");
 					
 					
+					
 				}
 				
-				if(count-1 == CURDAY && CURMONTH == curYearMonth.getMonthValue() && CURYEAR == curYearMonth.getYear())
-				{
-					borderPaneList[curLoc].setStyle("-fx-background-color: #6d6d6d");
-					dateLabelsList[curLoc].setText(" "+ (count-1) );
-					InfoTextAreaList[curLoc].setId("cur");
-					InfoTextAreaList[curLoc].setText("");
-					
+				
 
-				}
+		
+
+				
+				//if( currentCalender)
 				
 				
 			}
@@ -480,26 +450,11 @@ public class CalendarController
 	//Bug fixed but not very effcient, want appened instead of constantly deleting
 	private void updateNotesList()
 	{
-		/*
-		if(!(monthNotes[selectedDate].subNoteIsEmpty()))
+		int index = checkForDate(currentCalendar,selectedDate);
+		if(index != -1)
 		{
-			
+			notesList.getItems().clear();
 			InfoTextAreaList[selectedDateIndex].setText("");
-			notesList.getItems().clear();
-			
-			for(int i =0; i<monthNotes[selectedDate].lengthOfNotes();i++)
-			{
-				notesList.getItems().add(monthNotes[selectedDate].getSubNoteAt(i));
-				InfoTextAreaList[selectedDateIndex].appendText( monthNotes[selectedDate].getSubNoteAt(i)+"\n" );
-			}
-		}
-		*/
-		int index = checkForDate(currentCalendar);
-		System.out.println(index);
-		if(!currentCalendar.get(index).isNotesListEmpty())
-		{
-			notesList.getItems().clear();
-			
 			for(int i =0; i<currentCalendar.get(index).Notes.size();i++)
 			{
 				notesList.getItems().add(currentCalendar.get(index).Notes.get(i));
@@ -508,7 +463,6 @@ public class CalendarController
 		}
 	
 	}
-	
 	
 	
 	private int DayStringToNums(String day)
