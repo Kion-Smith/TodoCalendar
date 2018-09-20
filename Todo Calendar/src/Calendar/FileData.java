@@ -234,6 +234,7 @@ public class FileData
 
 	}
 	
+
 	
 	public int convertStringToInt(String string)
 	{
@@ -248,4 +249,15 @@ public class FileData
 		
 	}
 
+	public int  getFileDataListSize()
+	{
+		return calendarList.size();
+	}
+	
+	
+	public CalendarData getCalendarDataAt(int i)
+	{
+		return calendarList.get(i);
+	}
+	
 }

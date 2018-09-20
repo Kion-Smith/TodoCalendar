@@ -36,7 +36,10 @@ public class CalendarData
 	}
 	public void removeFromNotesList(int index)
 	{
-		Notes.remove(index);
+		if(!Notes.isEmpty())
+		{
+			Notes.remove(index);
+		}
 	}
 	public boolean isNotesListEmpty()
 	{
@@ -65,6 +68,7 @@ public class CalendarData
 		
 		return false;
 	}
+	
 	
 	public String toString()
 	{

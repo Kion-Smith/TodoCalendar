@@ -97,6 +97,11 @@ public class CalendarController
 			FileData curFileData= new FileData(curFile);
 			curFileData.initializeData();
 			
+			for(int i =0;i<curFileData.getFileDataListSize();i++)
+			{
+				currentCalendar.add(curFileData.getCalendarDataAt(i));
+			}
+			
 			
 		}
 		
@@ -200,15 +205,20 @@ public class CalendarController
 		try
 		{
 			
-			System.out.println(notesList.getSelectionModel().getSelectedIndex());
 			int index = checkForDate(currentCalendar,selectedDate);
-			
+			System.out.println("BEfore"+index);
 			if(index != -1 )
 			{
+				
 				currentCalendar.get(index).removeFromNotesList(notesList.getSelectionModel().getSelectedIndex());
+				updateNotesList();
+				
+				if(currentCalendar.get(index).isNotesListEmpty())
+				{
+					currentCalendar.remove(index);
+				}
 			}
 			
-			updateNotesList();
 
 		}
 		catch(Exception ex)
@@ -415,7 +425,6 @@ public class CalendarController
 						InfoTextAreaList[curLoc].setText("");
 						for(int i =0;i<currentCalendar.get(index).Notes.size();i++)
 						{
-							System.out.println("ran");
 							InfoTextAreaList[curLoc].appendText("-"+currentCalendar.get(index).Notes.get(i)+"\n");
 						}
 					}
@@ -434,14 +443,7 @@ public class CalendarController
 					
 				}
 				
-				
 
-		
-
-				
-				//if( currentCalender)
-				
-				
 			}
 		}
 		
@@ -461,6 +463,8 @@ public class CalendarController
 				InfoTextAreaList[selectedDateIndex].appendText("-"+currentCalendar.get(index).Notes.get(i)+"\n" );
 			}
 		}
+		
+		
 	
 	}
 	
