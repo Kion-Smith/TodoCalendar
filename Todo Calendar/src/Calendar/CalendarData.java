@@ -30,6 +30,8 @@ public class CalendarData
 	{
 		day =d;
 	}
+	
+	
 	public void addToNotesList(String s)
 	{
 		Notes.add(s);
@@ -59,6 +61,10 @@ public class CalendarData
 		return day;
 	}
 	
+	public int getDateCombined()
+	{
+		return day+month+year;
+	}
 	public boolean isIdenticalDate(int y,int m,int d)
 	{
 		if( year == y && month == m && day == d)

@@ -468,6 +468,80 @@ public class CalendarController
 	
 	}
 	
+	//implmentation of mergesort !!!(not tested)
+	public ArrayList<CalendarData> chronoOrder(ArrayList<CalendarData> obj)
+	{
+		//neeed to look at what stort alg would be best
+		ArrayList<CalendarData> firstHalf = new ArrayList<CalendarData>();
+		ArrayList<CalendarData> secondHalf = new ArrayList<CalendarData>();
+		int mid = obj.size()/2;
+		
+		if(obj.size()>1)
+		{
+			
+			
+			for(int i=0;i<mid;i++)
+			{
+				firstHalf.add(obj.get(i));
+			}
+			
+			for(int i=mid;i<obj.size();i++)
+			{
+				secondHalf.add(obj.get(i));
+			}
+			
+			merge(firstHalf,secondHalf,obj);
+			
+			
+		}
+		
+		return obj;
+	}
+	
+	public void merge(ArrayList<CalendarData> list1,ArrayList<CalendarData> list2,ArrayList<CalendarData> og)
+	{
+		int indexList1 =0;
+		int indexList2 =0;
+		int indexOG=0;
+		
+		while(indexList1<list1.size() && indexList2 < list2.size())
+		{
+			if(list1.get(indexList1).getDateCombined() < list2.get(indexList2).getDateCombined())
+			{
+				og.set(indexOG, list1.get(indexList1));
+				indexList1++;
+			}
+			else
+			{
+				og.set(indexOG, list2.get(indexList2));
+				indexList2++;
+			}
+			indexOG++;	
+		}
+		
+		ArrayList<CalendarData> temp;
+		int tempIndex;
+		
+		if(indexList1 >= list1.size())
+		{
+			temp = list2;
+			tempIndex = indexList2;
+		}
+		else
+		{
+			temp = list1;
+			tempIndex = indexList1;
+		}
+		
+		
+		for(int i=tempIndex;i<temp.size();i++)
+		{
+			og.set(indexOG, temp.get(i));
+			indexOG++;
+		}
+		
+	}
+
 	
 	private int DayStringToNums(String day)
 	{

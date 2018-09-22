@@ -17,7 +17,7 @@ public class FileData
 	//thinking about json or xml still looking
 	
 	File curCalendar;
-	String[] curDataList;
+	
 	
 	ArrayList<CalendarData> calendarList = new ArrayList();
 	
@@ -204,7 +204,7 @@ public class FileData
 		
 	}
 	
-	public void writeBackData() 
+	public void writeBackData(ArrayList<CalendarData> cList) 
 	{
 		
 		
@@ -234,7 +234,7 @@ public class FileData
 
 	}
 	
-
+	
 	
 	public int convertStringToInt(String string)
 	{
