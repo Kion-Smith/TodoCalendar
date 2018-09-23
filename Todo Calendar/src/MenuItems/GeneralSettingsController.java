@@ -65,9 +65,11 @@ public class GeneralSettingsController extends AnchorPane
 	{
 		FileChooser fc = new FileChooser();
 		
+		FileChooser.ExtensionFilter kscFileFilter = new FileChooser.ExtensionFilter("Kion Calendar Files (*.ksc)","*.ksc");
 		FileChooser.ExtensionFilter textFileFilter = new FileChooser.ExtensionFilter("Text Files (*.txt)","*.txt");
 		FileChooser.ExtensionFilter allFilesFilter = new FileChooser.ExtensionFilter("All Files ","*.*");
 		
+		fc.getExtensionFilters().add(kscFileFilter);
 		fc.getExtensionFilters().add(textFileFilter);
 		fc.getExtensionFilters().add(allFilesFilter);
 		
@@ -79,7 +81,7 @@ public class GeneralSettingsController extends AnchorPane
 	public void resetSettings()
 	{
 		userPref.remove("File_Loc");
-		File calanderDataFile = new File("CalanderInfo.txt");
+		File calanderDataFile = new File("testCurCal.ksc");
 		try {
 			calanderDataFile.createNewFile();
 			userPref.put("File_Loc", calanderDataFile.getAbsolutePath());

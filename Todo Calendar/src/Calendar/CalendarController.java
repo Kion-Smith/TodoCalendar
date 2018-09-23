@@ -71,14 +71,16 @@ public class CalendarController
 	ArrayList<CalendarData> currentCalendar;
 	ArrayList<CalendarData> pastCalendar;
 	
+	Preferences userPref = Preferences.userRoot();
+	
 	private void loadData()
 	{
 		//have some way to parse data from xml file here
-		Preferences userPref = Preferences.userRoot();
+		
 		
 		if(userPref.get("File_Loc", "null").equals("null"))
 		{
-			File calanderDataFile = new File("CalanderInfo.txt");
+			File calanderDataFile = new File("curCalendar.ksc");
 			try {
 				calanderDataFile.createNewFile();
 				userPref.put("File_Loc", calanderDataFile.getAbsolutePath());
@@ -250,13 +252,30 @@ public class CalendarController
 	{
 		FileChooser fc = new FileChooser();
 		
+		FileChooser.ExtensionFilter kscFileFilter = new FileChooser.ExtensionFilter("Kion Calendar Files (*.ksc)","*.ksc");
 		FileChooser.ExtensionFilter textFileFilter = new FileChooser.ExtensionFilter("Text Files (*.txt)","*.txt");
 		FileChooser.ExtensionFilter allFilesFilter = new FileChooser.ExtensionFilter("All Files ","*.*");
 		
+		fc.getExtensionFilters().add(kscFileFilter);
 		fc.getExtensionFilters().add(textFileFilter);
 		fc.getExtensionFilters().add(allFilesFilter);
 		
-		File selectedFile = fc.showOpenDialog(new Stage());
+		try
+		{
+			File selectedFile = fc.showOpenDialog(new Stage());
+			
+			if(selectedFile.exists())
+			{
+				userPref.put("File_Loc", selectedFile.getAbsolutePath());
+				loadData();
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("~~~ Error: File does not exist or was not selected");
+		}
+		
+		
 	}
 	
 	@FXML private void exitProgram()
@@ -466,6 +485,12 @@ public class CalendarController
 		
 		
 	
+	}
+	
+	public void saveCalendarData()
+	{
+		chronoOrder(currentCalendar);
+		//also add for the previous dates calendar
 	}
 	
 	//implmentation of mergesort !!!(not tested)
