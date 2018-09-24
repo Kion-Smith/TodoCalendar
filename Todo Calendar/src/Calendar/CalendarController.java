@@ -69,7 +69,7 @@ public class CalendarController
 	FileData curFileData;
 	
 	ArrayList<CalendarData> currentCalendar;
-	ArrayList<CalendarData> pastCalendar;
+	ArrayList<CalendarData> pastCalendar;// only for loading data from a file
 	
 	Preferences userPref = Preferences.userRoot();
 	

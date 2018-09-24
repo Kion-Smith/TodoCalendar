@@ -1,8 +1,10 @@
 package Calendar;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,11 +12,7 @@ public class FileData
 {
 	
 
-	// might want to save user data with an xml file or some other markup language
-	// need to save the month, the date, the year and all the information
-	// Prioritize close distances when talking about events in the future, and then things in the far future, and then finally events that have already happened
-	
-	//thinking about json or xml still looking
+	//I could store everything dealing with saving and file stuff/ arrays in here, not sure about this though
 	
 	File curCalendar;
 	
@@ -192,7 +190,8 @@ public class FileData
 		}
 		catch(Exception e)
 		{
-			System.out.println("Error when getting calendar date");
+			System.out.println("~~~ Error:Could not get calendar date");
+			e.printStackTrace();
 		}
 		
 		return null;
@@ -207,7 +206,33 @@ public class FileData
 	public void writeBackData(ArrayList<CalendarData> cList) 
 	{
 		
+		try
+		{
+			
+			
+			if(!curCalendar.exists())
+			{
+				curCalendar.createNewFile();
+			}
+			else
+			{
+				BufferedWriter bw = new BufferedWriter(new FileWriter(curCalendar));
+				
+				for(int i=0;i<cList.size();i++)
+				{
+					bw.write(cList.get(i).toString());
+					bw.newLine();
+				}
+				
+			}
+		}
+		catch(Exception e)
+		{
+		 System.out.println("~~~ Error: Could not write/find the file");
+		 e.printStackTrace();
+		}
 		
+	
 	}
 	
 
