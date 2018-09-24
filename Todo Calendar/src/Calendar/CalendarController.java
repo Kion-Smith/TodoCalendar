@@ -73,46 +73,11 @@ public class CalendarController
 	
 	Preferences userPref = Preferences.userRoot();
 	
-	private void loadData()
-	{
-		//have some way to parse data from xml file here
-		
-		
-		if(userPref.get("File_Loc", "null").equals("null"))
-		{
-			File calanderDataFile = new File("curCalendar.ksc");
-			try {
-				calanderDataFile.createNewFile();
-				userPref.put("File_Loc", calanderDataFile.getAbsolutePath());
-			} 
-			catch (IOException e) 
-			{
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			//read data
-			
-			System.out.println(userPref.get("File_Loc", "null"));
-			File curFile = new File(userPref.get("File_Loc", "null"));
-			FileData curFileData= new FileData(curFile);
-			curFileData.initializeData();
-			
-			for(int i =0;i<curFileData.getFileDataListSize();i++)
-			{
-				currentCalendar.add(curFileData.getCalendarDataAt(i));
-			}
-			
-			
-		}
-		
-		
-		
-	}
 	
+	// JAVA FX  functions
 	@FXML private void initialize()
 	{
+		//add background task here
 		
 		currentCalendar =new ArrayList();
 		pastCalendar=new ArrayList();
@@ -231,25 +196,10 @@ public class CalendarController
 		
 	}
 	
-	private int checkForDate(ArrayList<CalendarData> list, int date)
-	{
-		if(!list.isEmpty())
-		{
-			for(int i =0;i<currentCalendar.size();i++)
-			{
-				if(currentCalendar.get(i).isIdenticalDate(curYearMonth.getYear(), curYearMonth.getMonthValue(), date))
-				{
-					return i;
-				}
-			}
-			
-		}
-		
-		return -1;
-	}
-	
+
 	@FXML private void openFile()
 	{
+		saveCalendarData();
 		FileChooser fc = new FileChooser();
 		
 		FileChooser.ExtensionFilter kscFileFilter = new FileChooser.ExtensionFilter("Kion Calendar Files (*.ksc)","*.ksc");
@@ -284,19 +234,7 @@ public class CalendarController
 		System.exit(0);
 	}
 	
-	private void curCell(int col, int row)
-	{
-		
-		Pane pane = new Pane();
-	    pane.setOnMouseClicked(e ->  { 
-	    	
-	    	if(!dateLabelsList[row*7+col].getText().equals("") )
-	    		setSelectedDate(col,row); 
-	    });
-	    
-	   calendarPane.add(pane, col, row);
-	   	
-    }
+
 	
 	@FXML private void openAboutWindow()
 	{
@@ -333,77 +271,65 @@ public class CalendarController
 			
 		}
 	}
+	// END OF FX FUNCTIONS
 	
-
-	//might want to rename this
-	private void setSelectedDate(int col, int row)
+	
+	
+	
+	//FILE DATA
+	//Loading data from file
+	private void loadData()
 	{
-		if(selectedDateIndex != -1)
-		{
-			if(CURDAY-1 == selectedDate && CURMONTH == curYearMonth.getMonthValue() && CURYEAR == curYearMonth.getYear())
-			{
-				borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #6d6d6d;");
-				InfoTextAreaList[selectedDateIndex].setId("cur");
-				
-			}
-			else
-			{
-				borderPaneList[selectedDateIndex].setStyle("-fx-background-color: none;");
-				InfoTextAreaList[selectedDateIndex].setId("cal");
-			}
-		}
-
-		notesList.getItems().clear();
-		int oldSelectedIndex = selectedDateIndex;
-		selectedDateIndex = row*7+col;
+		//have some way to parse data from xml file here
 		
-		try
-		{
-			selectedDate =Integer.parseInt(dateLabelsList[selectedDateIndex].getText().substring(1,dateLabelsList[selectedDateIndex].getText().length())) -1;
-			//cause of error
-			updateNotesList();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			selectedDate = -1;
-		}
 		
-		if(oldSelectedIndex == row*7+col)
+		if(userPref.get("File_Loc", "null").equals("null"))
 		{
-			unSelectDate();
+			File calanderDataFile = new File("curCalendar.ksc");
+			try {
+				calanderDataFile.createNewFile();
+				userPref.put("File_Loc", calanderDataFile.getAbsolutePath());
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
 		}
 		else
 		{
-			borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #898989;");
-			InfoTextAreaList[selectedDateIndex].setId("sel");
+			//read data
+			
+			System.out.println(userPref.get("File_Loc", "null"));
+			File curFile = new File(userPref.get("File_Loc", "null"));
+			FileData curFileData= new FileData(curFile);
+			curFileData.initializeData();
+			
+			for(int i =0;i<curFileData.getFileDataListSize();i++)
+			{
+				currentCalendar.add(curFileData.getCalendarDataAt(i));
+			}
+			
+			
 		}
+		
 	}
 	
-	//want to name this somthing better
-	private void unSelectDate()
+	//Used for getting mouse event for calendar dates and populating dates
+	private void curCell(int col, int row)
 	{
 		
-		if(selectedDateIndex>-1)
-		{
-			
-			if(CURDAY-1 == selectedDate && CURMONTH == curYearMonth.getMonthValue() && CURYEAR == curYearMonth.getYear())
-			{
-				borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #6d6d6d;");
-				InfoTextAreaList[selectedDateIndex].setId("cur");
-			}
-			else
-			{
-				borderPaneList[selectedDateIndex].setStyle("-fx-background-color: none;");
-				InfoTextAreaList[selectedDateIndex].setId("cal");
-				selectedDateIndex = -1;
-			}
-		}
-
-	}
+		Pane pane = new Pane();
+	    pane.setOnMouseClicked(e ->  { 
+	    	
+	    	if(!dateLabelsList[row*7+col].getText().equals("") )
+	    		setSelectedDate(col,row); 
+	    });
+	    
+	   calendarPane.add(pane, col, row);
+	   	
+    }
 	
-	
-	
+	//Setting all the calendar dates( from file or from past data)
 	private void setCalanderDates()
 	{
 		//in here load data from file
@@ -468,6 +394,95 @@ public class CalendarController
 		
 	}
 	
+	//Check to see if current date equals the calendar date
+	private int checkForDate(ArrayList<CalendarData> list, int date)
+	{
+		if(!list.isEmpty())
+		{
+			for(int i =0;i<currentCalendar.size();i++)
+			{
+				if(currentCalendar.get(i).isIdenticalDate(curYearMonth.getYear(), curYearMonth.getMonthValue(), date))
+				{
+					return i;
+				}
+			}
+			
+		}
+		
+		return -1;
+	}
+	
+	//CALENDAR INTERACTION
+	//Selecting date
+	private void setSelectedDate(int col, int row)
+	{
+		if(selectedDateIndex != -1)
+		{
+			if(CURDAY-1 == selectedDate && CURMONTH == curYearMonth.getMonthValue() && CURYEAR == curYearMonth.getYear())
+			{
+				borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #6d6d6d;");
+				InfoTextAreaList[selectedDateIndex].setId("cur");
+				
+			}
+			else
+			{
+				borderPaneList[selectedDateIndex].setStyle("-fx-background-color: none;");
+				InfoTextAreaList[selectedDateIndex].setId("cal");
+			}
+		}
+
+		notesList.getItems().clear();
+		int oldSelectedIndex = selectedDateIndex;
+		selectedDateIndex = row*7+col;
+		
+		try
+		{
+			selectedDate =Integer.parseInt(dateLabelsList[selectedDateIndex].getText().substring(1,dateLabelsList[selectedDateIndex].getText().length())) -1;
+			//cause of error
+			updateNotesList();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			selectedDate = -1;
+		}
+		
+		if(oldSelectedIndex == row*7+col)
+		{
+			unSelectDate();
+		}
+		else
+		{
+			borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #898989;");
+			InfoTextAreaList[selectedDateIndex].setId("sel");
+		}
+	}
+	
+
+	//unselect current day
+	private void unSelectDate()
+	{
+		
+		if(selectedDateIndex>-1)
+		{
+			
+			if(CURDAY-1 == selectedDate && CURMONTH == curYearMonth.getMonthValue() && CURYEAR == curYearMonth.getYear())
+			{
+				borderPaneList[selectedDateIndex].setStyle("-fx-background-color: #6d6d6d;");
+				InfoTextAreaList[selectedDateIndex].setId("cur");
+			}
+			else
+			{
+				borderPaneList[selectedDateIndex].setStyle("-fx-background-color: none;");
+				InfoTextAreaList[selectedDateIndex].setId("cal");
+				selectedDateIndex = -1;
+			}
+		}
+
+	}
+	
+	
+	
 	//Bug fixed but not very effcient, want appened instead of constantly deleting
 	private void updateNotesList()
 	{
@@ -487,13 +502,16 @@ public class CalendarController
 	
 	}
 	
+	
 	public void saveCalendarData()
 	{
+		System.out.println(currentCalendar.toString());
 		chronoOrder(currentCalendar);
+		System.out.println(chronoOrder(currentCalendar).toString());
 		//also add for the previous dates calendar
 	}
 	
-	//implmentation of mergesort !!!(not tested)
+	//implmentation of mergesort !!!(does not work currently)
 	public ArrayList<CalendarData> chronoOrder(ArrayList<CalendarData> obj)
 	{
 		//neeed to look at what stort alg would be best
