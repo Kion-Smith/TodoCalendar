@@ -116,6 +116,7 @@ public class CalendarController
 			}
 		}
 		
+		System.out.println("A");
 		setCalanderDates();
 	}
 	
@@ -522,7 +523,6 @@ public class CalendarController
 		if(obj.size()>1)
 		{
 			
-			
 			for(int i=0;i<mid;i++)
 			{
 				firstHalf.add(obj.get(i));
@@ -562,13 +562,15 @@ public class CalendarController
 			indexOG++;	
 		}
 		
-		ArrayList<CalendarData> temp;
+		ArrayList<CalendarData> temp = null;
 		int tempIndex;
 		
 		if(indexList1 >= list1.size())
 		{
+			System.out.println("ZZ"+temp.toString());
 			temp = list2;
 			tempIndex = indexList2;
+			System.out.println("xx"+temp.toString());
 		}
 		else
 		{

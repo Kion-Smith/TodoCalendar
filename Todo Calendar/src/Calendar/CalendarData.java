@@ -31,6 +31,15 @@ public class CalendarData
 		day =d;
 	}
 	
+	public void setNotes(ArrayList<String> s)
+	{
+		Notes.clear();
+		for(int i =0;i<s.size();i++)
+		{
+			Notes.add(s.get(i));
+		}
+	}
+	
 	
 	public void addToNotesList(String s)
 	{
@@ -60,6 +69,10 @@ public class CalendarData
 	{
 		return day;
 	}
+	public ArrayList<String> getNotes()
+	{
+		return Notes;
+	}
 	
 	public int getDateCombined()
 	{
@@ -86,4 +99,17 @@ public class CalendarData
 		temp+="}";
 		return temp;
 	}
+	
+	public CalendarData deepCopy(CalendarData tempCal)
+	{
+		tempCal.setDay(getDay());
+		tempCal.setMonth(getMonth());
+		tempCal.setYear(getYear());
+		
+		tempCal.setNotes(getNotes());
+		
+		
+		return tempCal;
+	}
+	
 }
