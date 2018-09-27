@@ -56,7 +56,6 @@ public class CalendarController
 	@FXML private ListView<String> notesList;
 	
 	YearMonth curYearMonth = YearMonth.now();
-	//Notes monthNotes[] = new Notes[31];
 
 	private final int CURMONTH = LocalDate.now().getMonthValue();
 	private final int CURDAY = LocalDate.now().getDayOfMonth();
@@ -116,7 +115,6 @@ public class CalendarController
 			}
 		}
 		
-		System.out.println("A");
 		setCalanderDates();
 	}
 	
