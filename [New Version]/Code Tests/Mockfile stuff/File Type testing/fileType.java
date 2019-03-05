@@ -18,11 +18,8 @@ public class fileType
 			Scanner sc = new Scanner(file);
 			
 			readKionFile(sc);
-			/*
-			while(sc.hasNextLine())
-			{
-				System.out.println(sc.nextLine());
-			}*/
+			
+
 			
 			sc.close();
 			System.out.println("Scanner Closed");
@@ -38,9 +35,40 @@ public class fileType
 	
 	public static void readKionFile(Scanner s)
 	{
+		//local vars for testing inputs and out puts
+		int year = -1;
+		int month = -1;
+		int date = -1;
+		double timer = -1;
+		ArrayList<String> entries;
 		
+		while(s.hasNextLine())
+		{
+			String temp = s.nextLine();
+			temp = temp.replaceAll("\\s","");//replacing all whitespace
+			
+			switch(temp.substring(0,1))
+			{
+				case "<":
+					System.out.println("<");
+			}
+		
+			
+		}	
 	}
 	
+	public static boolean isDigit(String numS)
+	{
+		try
+		{
+			int n = Integer.parseInt(numS);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
 	
 	
 	
