@@ -44,17 +44,35 @@ public class fileType
 		
 		while(s.hasNextLine())
 		{
-			String temp = s.nextLine();
-			temp = temp.replaceAll("\\s","");//replacing all whitespace
+			String curLine = s.nextLine();
+			String noSpace = curLine.replaceAll("\\s","");//replacing all whitespace
 			
-			switch(temp.substring(0,1))
+			
+			switch(noSpace.charAt(0)+"")
 			{
 				case "<":
-					System.out.println("<");
+					System.out.println("<::"+noSpace);
+					break;
+				case "(":
+					System.out.println("(::"+noSpace);
+					break;
+				case "[":
+					System.out.println("[::"+noSpace);
+					break;
+				case "{":
+					System.out.println("{::"+noSpace);
+					break;
+				default:
+					break;
 			}
-		
+			
 			
 		}	
+	}
+	
+	public static void writeKionFile(FileWriter fw)
+	{
+		
 	}
 	
 	public static boolean isDigit(String numS)
