@@ -51,7 +51,10 @@ public class fileType
 			switch(noSpace.charAt(0)+"")
 			{
 				case "<":
-					System.out.println("<::"+noSpace);
+					if(isDigit(noSpace.substring(0,noSpace.length()-2)))
+					{
+						System.out.println(noSpace.substring(0,noSpace.length()-1));
+					}
 					break;
 				case "(":
 					System.out.println("(::"+noSpace);
@@ -70,7 +73,7 @@ public class fileType
 		}	
 	}
 	
-	public static void writeKionFile(FileWriter fw)
+	public static void writeKionFile(FileWriter fw,calObj cal)
 	{
 		
 	}
