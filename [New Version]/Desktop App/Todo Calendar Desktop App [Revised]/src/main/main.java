@@ -1,6 +1,9 @@
 package main;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class main extends Application 
@@ -12,9 +15,13 @@ public class main extends Application
 	}
 	
 	@Override
-	public void start(Stage arg0) throws Exception 
+	public void start(Stage s) throws Exception 
 	{
-		//add the jaavafx stuff here
+		Parent root = FXMLLoader.load(getClass().getResource("../fxml Items/mainScreen.fxml"));
+		
+		s.setTitle("TODO Calendar by Kion Smith");
+		s.setScene(new Scene(root,1280,720));
+		s.show();
 	}
 	
 	@Override 
