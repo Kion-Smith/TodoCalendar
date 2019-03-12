@@ -47,17 +47,19 @@ public class fileType
 			String curLine = s.nextLine();
 			String noSpace = curLine.replaceAll("\\s","");//replacing all whitespace
 			
-			
+			int offset = 1;
+			/*
 			switch(noSpace.charAt(0)+"")
 			{
 				case "<":
-					if(isDigit(noSpace.substring(0,noSpace.length()-2)))
+					offset = getOffset(noSpace.charAt(1)); // end of a statement
+					if(isDigit(noSpace.substring(offset,noSpace.length()-1)))
 					{
-						System.out.println(noSpace.substring(0,noSpace.length()-1));
+						System.out.println(noSpace.substring(offset,noSpace.length()-1));
 					}
 					break;
 				case "(":
-					System.out.println("(::"+noSpace);
+					System.out.println(""+noSpace);
 					break;
 				case "[":
 					System.out.println("[::"+noSpace);
@@ -68,7 +70,7 @@ public class fileType
 				default:
 					break;
 			}
-			
+			*/ //neded to rethink this
 			
 		}	
 	}
@@ -78,10 +80,12 @@ public class fileType
 		
 	}
 	
+	
 	public static boolean isDigit(String numS)
 	{
 		try
 		{
+			
 			int n = Integer.parseInt(numS);
 			return true;
 		}
@@ -91,6 +95,15 @@ public class fileType
 		}
 	}
 	
+	public static int getOffset(char c)
+	{
+		if(c == '/')
+		{
+			return 2;
+		}
+		
+		return 1;
+	}
 	
 	
 }
