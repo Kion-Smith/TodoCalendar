@@ -20,13 +20,20 @@ public class binFile
 			//write to file
 			FileOutputStream fos = new FileOutputStream(f);
 			BufferedOutputStream bos = new BufferedOutputStream(fos);
+			DataOutputStream dos = new DataOutputStream(bos);
 			
 			//not working how I expect it too need to look into this
-			bos.write(input.getBytes(StandardCharsets.UTF_8));
-
+			dos.writeUTF(input);
+			dos.writeInt(1);
 			
 			bos.flush();
 			fos.close();
+			dos.close();
+			
+			DataInpuStream dis = new DataInputStream(bos);
+			
+			//boolean eof;
+
 			
 		}
 		catch(Exception e)
