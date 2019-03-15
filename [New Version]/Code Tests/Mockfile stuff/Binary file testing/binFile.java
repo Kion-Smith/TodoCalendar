@@ -14,31 +14,67 @@ public class binFile
 			
 			//user input
 			Scanner kb = new Scanner(System.in);
-			System.out.println("Enter a string, I will convert it into binary file format");
-			String input = kb.nextLine();
+			System.out.println("What do you want to do?");
+			System.out.println("1: Write to a file");
+			System.out.println("2: Read from a file");
+			int input = kb.nextInt();
 			
-			//write to file
-			FileOutputStream fos = new FileOutputStream(f);
-			BufferedOutputStream bos = new BufferedOutputStream(fos);
-			DataOutputStream dos = new DataOutputStream(bos);
+			DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(f)));
+			DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(f)));
 			
-			//not working how I expect it too need to look into this
-			dos.writeUTF(input);
-			dos.writeInt(1);
+			switch(input)
+			{
+				case 1:
+					dos  = writeToFile(dos,kb);
+					System.out.println("Writing from a file");
+					dos.close();
+					break;
+				case 2:
+					readFromFile(dis);
+					System.out.println("Reading from a file");
+					break;
+				default:
+					main(args);
+					System.out.println("Enter a valid input");
+					break;
+					
+			}
 			
-			bos.flush();
-			fos.close();
-			dos.close();
-			
-			DataInpuStream dis = new DataInputStream(bos);
-			
-			//boolean eof;
-
-			
+		
 		}
 		catch(Exception e)
 		{
 			System.out.println("MAIN-CATCH:Could not create file");
 		}
+	}
+	
+	
+	public static void readFromFile(DataInputStream d) throws IOException
+	{
+		System.out.println("Reading the data from the file");
+		//not reading how I expected
+		try
+		{
+			int tempInt = d.readInt();
+			String temp = d.readUTF();
+			
+			System.out.println(tempInt+","+temp);
+		}
+		catch(Exception e)
+		{
+			
+		}
+	}
+	
+	public static DataOutputStream writeToFile(DataOutputStream d, Scanner s) throws IOException
+	{
+		System.out.println("Enter data for me to encrypt");
+		s = new Scanner(System.in);
+		String input = s.nextLine();
+		
+		d.writeInt(1);
+		d.writeUTF(input);
+		
+		return d;
 	}
 }
