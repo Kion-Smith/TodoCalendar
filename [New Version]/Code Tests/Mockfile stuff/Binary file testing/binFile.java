@@ -3,6 +3,7 @@ import java.util.*;
 import java.nio.charset.*;
 public class binFile
 {
+	//gonna look at this later https://www.geeksforgeeks.org/java-io-datainputstream-class-java-set-1/
 	public static void main(String []args)
 	{
 		try
@@ -28,10 +29,25 @@ public class binFile
 					dos  = writeToFile(dos,kb);
 					System.out.println("Writing from a file");
 					dos.close();
+					//main(args);
 					break;
 				case 2:
 					readFromFile(dis);
+					dis.close();
+					/*
+					try
+					{
+						int tempInt = dis.readInt();
+						String temp = dis.readUTF();
+						
+						System.out.println(tempInt);
+					}
+					catch(Exception e)
+					{
+						dis.close();
+					}*/
 					System.out.println("Reading from a file");
+					//main(args);
 					break;
 				default:
 					main(args);
@@ -51,18 +67,25 @@ public class binFile
 	
 	public static void readFromFile(DataInputStream d) throws IOException
 	{
+		
 		System.out.println("Reading the data from the file");
 		//not reading how I expected
 		try
 		{
-			int tempInt = d.readInt();
-			String temp = d.readUTF();
+
+			while(d.available()>0)
+			{
+				int tempInt = d.readInt();
+				String temp  = d.readUTF();
+				
+				System.out.println(tempInt+","+temp);
+			}
 			
-			System.out.println(tempInt+","+temp);
+			
 		}
 		catch(Exception e)
 		{
-			
+			d.close();
 		}
 	}
 	
@@ -71,8 +94,8 @@ public class binFile
 		System.out.println("Enter data for me to encrypt");
 		s = new Scanner(System.in);
 		String input = s.nextLine();
-		
-		d.writeInt(1);
+		int x = 1;
+		d.writeInt(x);
 		d.writeUTF(input);
 		
 		return d;
